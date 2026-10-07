@@ -11,10 +11,12 @@ public class PlayerMovement : MonoBehaviour
     public float accellarationSpeed;
     //public float currentSpeed;
     public float brakePower;
+    public float steering;
 
     [Header("Car Values")]
     public bool isAccellerating;
     public bool isBraking;
+    public bool canSteer;
 
     [Header("Player Components")]
     [SerializeField] private Rigidbody2D rigidbody2D;
@@ -22,8 +24,6 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Direction")]
     [SerializeField] private Vector2 moveDirection;
-    [SerializeField] private Vector2 moveUp;
-    [SerializeField] private Vector2 moveDown;
 
     [Header("Player Input")]
     [SerializeField] private InputAction throttleAction;
@@ -35,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
         //Initialize Cars Stock Values
         isAccellerating = false;
         isBraking = false;
+        canSteer = false;
 
         //Initialize Core Components
         rigidbody2D = GetComponent<Rigidbody2D>();
@@ -42,8 +43,6 @@ public class PlayerMovement : MonoBehaviour
 
         //Define Direction
         moveDirection = new Vector2(1f, 0f);
-        moveUp = new Vector2(0f, 2f);
-        moveDown = new Vector2(0f, -2f);
 
         //Define Input
         throttleAction = playerInput.actions.FindAction("Throttle");
@@ -60,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+        Debug.Log(rigidbody2D.linearVelocity.x);
     }
 
     void FixedUpdate()
@@ -68,8 +67,7 @@ public class PlayerMovement : MonoBehaviour
         Vector2 input = steerAction.ReadValue<Vector2>();
         float horizontalInput = input.x;
         float verticalInput = input.y;
-
-        rigidbody2D.AddForce(Vector2.up * verticalInput);
+        
 
         if (isAccellerating == true)
         {
@@ -94,7 +92,13 @@ public class PlayerMovement : MonoBehaviour
 
         if (rigidbody2D.linearVelocity.magnitude >= topSpeed)
         {
-            rigidbody2D.linearVelocity = Vector2.ClampMagnitude(rigidbody2D.linearVelocity, topSpeed);
+            //rigidbody2D.linearVelocity = Vector2.ClampMagnitude(rigidbody2D.linearVelocity, topSpeed);
+            rigidbody2D.linearVelocity = rigidbody2D.linearVelocity * topSpeed;
+        }
+
+        if(rigidbody2D.linearVelocity.magnitude >= 0.01)
+        {
+            rigidbody2D.AddForce(Vector2.up * verticalInput * steering);
         }
     }
 
