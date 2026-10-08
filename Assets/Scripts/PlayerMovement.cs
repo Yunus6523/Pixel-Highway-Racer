@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     //public float currentSpeed;
     public float brakePower;
     public float steering;
+    public float[] gears;
 
     [Header("Car Values")]
     public bool isAccellerating;
@@ -36,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
         isAccellerating = false;
         isBraking = false;
         canSteer = false;
+        accellarationSpeed = gears[0];
 
         //Initialize Core Components
         rigidbody2D = GetComponent<Rigidbody2D>();
@@ -92,8 +94,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (rigidbody2D.linearVelocity.magnitude >= topSpeed)
         {
-            //rigidbody2D.linearVelocity = Vector2.ClampMagnitude(rigidbody2D.linearVelocity, topSpeed);
-            rigidbody2D.linearVelocity = rigidbody2D.linearVelocity * topSpeed;
+            rigidbody2D.linearVelocity = Vector2.ClampMagnitude(rigidbody2D.linearVelocity, topSpeed);
+            nextGear();
         }
 
         if(rigidbody2D.linearVelocity.magnitude >= 0.01)
@@ -105,7 +107,6 @@ public class PlayerMovement : MonoBehaviour
     void throttle(InputAction.CallbackContext context)
     {
         isAccellerating = true;
-        Debug.Log("Vroom Vroom");
     }
 
     void slowDown(InputAction.CallbackContext context)
@@ -115,12 +116,25 @@ public class PlayerMovement : MonoBehaviour
 
     void brake(InputAction.CallbackContext context)
     {
-        Debug.Log("SKREEEEE!");
         isBraking = true;
     }
 
     void releaseBrake(InputAction.CallbackContext context)
     {
         isBraking = false;
+    }
+
+    void nextGear()
+    {
+        Debug.Log("Switched Gear");
+        for(int i = 0; i < gears.Length; i++)
+        {
+            Debug.Log(gears);
+            accellarationSpeed = accellarationSpeed + gears[i];
+            if (gears[i] <= gears.Length)
+            {
+                return;
+            }
+        }
     }
 }
