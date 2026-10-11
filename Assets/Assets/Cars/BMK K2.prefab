@@ -420,10 +420,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0fee51f9e0ba2246bb6a27a13c72daa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  topSpeed: 50
-  accellarationSpeed: 10
-  brakePower: 5
+  topSpeed: 290
+  accellarationSpeed: 0
+  brakePower: 15
   steering: 5
+  gears:
+  - 50
+  - 45
+  - 20
+  - 15
+  - 10
+  - 5
+  - 5
   isAccellerating: 0
   isBraking: 0
   canSteer: 0
@@ -455,6 +463,16 @@ MonoBehaviour:
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: 0ff8b63a-fe91-419a-a886-6ddb793c768f
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+    m_Priority: 0
+  shiftUpAction:
+    m_Name: Shift Up
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 55f7a587-8f52-4596-91e0-cd52e5245522
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []

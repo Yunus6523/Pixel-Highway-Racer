@@ -45,6 +45,26 @@
                     "interactions": "",
                     "initialStateCheck": false,
                     "priority": 0
+                },
+                {
+                    "name": "Shift Up",
+                    "type": "Button",
+                    "id": "43646fb1-dc3c-45ae-a10f-f647a1507a83",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
+                },
+                {
+                    "name": "Shift Down",
+                    "type": "Button",
+                    "id": "96f851ce-fa35-41d6-b5f0-dda92b1abe23",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false,
+                    "priority": 0
                 }
             ],
             "bindings": [
@@ -133,6 +153,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Lights",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "830105cd-9574-4329-9151-8c1f500cb7f5",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shift Up",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ad602825-fd5a-4ebe-808c-ffe9a5fbaccf",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shift Down",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

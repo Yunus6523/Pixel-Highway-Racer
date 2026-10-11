@@ -1,3 +1,4 @@
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -9,7 +10,6 @@ public class PlayerMovement : MonoBehaviour
     [Header("Car Stock Values")]
     public float topSpeed;
     public float accellarationSpeed;
-    //public float currentSpeed;
     public float brakePower;
     public float steering;
     public float[] gears;
@@ -19,17 +19,21 @@ public class PlayerMovement : MonoBehaviour
     public bool isBraking;
     public bool canSteer;
 
+
     [Header("Player Components")]
     [SerializeField] private Rigidbody2D rigidbody2D;
     [SerializeField] private PlayerInput playerInput;
 
+
     [Header("Direction")]
     [SerializeField] private Vector2 moveDirection;
+
 
     [Header("Player Input")]
     [SerializeField] private InputAction throttleAction;
     [SerializeField] private InputAction brakeAction;
     [SerializeField] private InputAction steerAction;
+    [SerializeField] private InputAction shiftUpAction;
 
     void Start()
     {
@@ -50,12 +54,14 @@ public class PlayerMovement : MonoBehaviour
         throttleAction = playerInput.actions.FindAction("Throttle");
         brakeAction = playerInput.actions.FindAction("Brake");
         steerAction = playerInput.actions.FindAction("Steer");
+        shiftUpAction = playerInput.actions.FindAction("Shift Up");
 
         //Initialize Input
         throttleAction.performed += throttle;
         throttleAction.canceled += slowDown;
         brakeAction.performed += brake;
         brakeAction.canceled += releaseBrake;
+        shiftUpAction.performed += shiftNextGear;
     }
 
     // Update is called once per frame
@@ -95,7 +101,7 @@ public class PlayerMovement : MonoBehaviour
         if (rigidbody2D.linearVelocity.magnitude >= topSpeed)
         {
             rigidbody2D.linearVelocity = Vector2.ClampMagnitude(rigidbody2D.linearVelocity, topSpeed);
-            nextGear();
+            //nextGear();
         }
 
         if(rigidbody2D.linearVelocity.magnitude >= 0.01)
@@ -124,17 +130,20 @@ public class PlayerMovement : MonoBehaviour
         isBraking = false;
     }
 
+    void shiftNextGear(InputAction.CallbackContext context)
+    {
+        nextGear();
+    }
+
     void nextGear()
     {
         Debug.Log("Switched Gear");
-        for(int i = 0; i < gears.Length; i++)
+        for (int i = 0; i < gears.Length; i++)
         {
-            Debug.Log(gears);
+            Debug.Log(i);
+            i++;
             accellarationSpeed = accellarationSpeed + gears[i];
-            if (gears[i] <= gears.Length)
-            {
-                return;
-            }
+            i++;
         }
     }
 }
