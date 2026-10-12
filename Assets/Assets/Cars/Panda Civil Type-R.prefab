@@ -355,7 +355,7 @@ GameObject:
   - component: {fileID: 6072410609453525737}
   m_Layer: 0
   m_Name: Panda Civil Type-R
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -421,9 +421,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   topSpeed: 235
-  accellarationSpeed: 6.8
+  accellarationSpeed: 0
   brakePower: 5
   steering: 5
+  gears:
+  - 20
+  - 15
+  - 10
+  - 5
+  - 5
   isAccellerating: 0
   isBraking: 0
   canSteer: 0
@@ -455,6 +461,16 @@ MonoBehaviour:
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: 0ff8b63a-fe91-419a-a886-6ddb793c768f
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+    m_Priority: 0
+  shiftUpAction:
+    m_Name: Shift Up
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 5457d6ca-4382-41b0-a75c-100624294561
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
