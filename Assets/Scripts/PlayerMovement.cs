@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     public bool isAccellerating;
     public bool isBraking;
     public bool canSteer;
+    public int currentGear;
 
 
     [Header("Player Components")]
@@ -34,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private InputAction brakeAction;
     [SerializeField] private InputAction steerAction;
     [SerializeField] private InputAction shiftUpAction;
+    [SerializeField] private InputAction shiftDownAction;
 
     void Start()
     {
@@ -42,6 +44,7 @@ public class PlayerMovement : MonoBehaviour
         isBraking = false;
         canSteer = false;
         accellarationSpeed = gears[0];
+        currentGear = 0;
 
         //Initialize Core Components
         rigidbody2D = GetComponent<Rigidbody2D>();
@@ -55,6 +58,7 @@ public class PlayerMovement : MonoBehaviour
         brakeAction = playerInput.actions.FindAction("Brake");
         steerAction = playerInput.actions.FindAction("Steer");
         shiftUpAction = playerInput.actions.FindAction("Shift Up");
+        shiftDownAction = playerInput.actions.FindAction("Shift Down");
 
         //Initialize Input
         throttleAction.performed += throttle;
@@ -62,12 +66,13 @@ public class PlayerMovement : MonoBehaviour
         brakeAction.performed += brake;
         brakeAction.canceled += releaseBrake;
         shiftUpAction.performed += shiftNextGear;
+        shiftDownAction.performed += shiftPreviousGear;
     }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(rigidbody2D.linearVelocity.x);
+        //Debug.Log(rigidbody2D.linearVelocity.x);
     }
 
     void FixedUpdate()
@@ -135,15 +140,41 @@ public class PlayerMovement : MonoBehaviour
         nextGear();
     }
 
+    void shiftPreviousGear(InputAction.CallbackContext context)
+    {
+        previousGear();
+    }
+
     void nextGear()
     {
-        Debug.Log("Switched Gear");
-        for (int i = 0; i < gears.Length; i++)
+        if(currentGear < gears.Length-1)
         {
-            Debug.Log(i);
-            i++;
-            accellarationSpeed = accellarationSpeed + gears[i];
-            i++;
+            currentGear += 1;
+            Debug.Log($"currentGear switch {currentGear}");
+            accellarationSpeed = 0;
+            for (int i = 0; i <= currentGear; i++)
+            {
+                Debug.Log(i);
+                accellarationSpeed += accellarationSpeed + gears[i];
+            }
+        }
+        
+        Debug.Log("Switched Gear");
+        
+    }
+
+    void previousGear()
+    {
+        if(currentGear > 0)
+        {
+            currentGear -= 1;
+            Debug.Log($"currentGear switch {currentGear}");
+            accellarationSpeed = 0;
+            for (int i = 0; i <= currentGear; i++)
+            {
+                Debug.Log(i);
+                accellarationSpeed += accellarationSpeed + gears[i];
+            }
         }
     }
 }

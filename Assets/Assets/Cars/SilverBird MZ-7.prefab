@@ -424,9 +424,11 @@ MonoBehaviour:
   accellarationSpeed: 10
   brakePower: 5
   steering: 5
+  gears: []
   isAccellerating: 0
   isBraking: 0
   canSteer: 0
+  currentGear: 0
   rigidbody2D: {fileID: 0}
   playerInput: {fileID: 0}
   moveDirection: {x: 0, y: 0}
@@ -455,6 +457,26 @@ MonoBehaviour:
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: 0ff8b63a-fe91-419a-a886-6ddb793c768f
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+    m_Priority: 0
+  shiftUpAction:
+    m_Name: Shift Up
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: da2b96a5-4cbc-4062-9373-8ebf1f8b82c1
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+    m_Priority: 0
+  shiftDownAction:
+    m_Name: Shift Down
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 6f38c208-187e-4e2e-8a73-ba4cb676f188
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []

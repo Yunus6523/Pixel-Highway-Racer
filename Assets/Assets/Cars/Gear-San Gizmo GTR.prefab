@@ -428,6 +428,7 @@ MonoBehaviour:
   isAccellerating: 0
   isBraking: 0
   canSteer: 0
+  currentGear: 0
   rigidbody2D: {fileID: 0}
   playerInput: {fileID: 0}
   moveDirection: {x: 0, y: 0}
@@ -466,6 +467,16 @@ MonoBehaviour:
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: 46818429-5dfe-4ecb-928a-e293b9a584d6
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+    m_Priority: 0
+  shiftDownAction:
+    m_Name: Shift Down
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: a55dcd5f-8f4c-4f7a-b4fb-81906eb9c0e8
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []
