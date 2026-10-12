@@ -328,20 +328,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0fee51f9e0ba2246bb6a27a13c72daa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  topSpeed: 235
+  topSpeed: 0
   accellarationSpeed: 0
   brakePower: 5
   steering: 5
   gears:
-  - 20
+  - 5
+  - 5
+  - 2.5
+  - 2.5
+  - 2
+  speedPerGears:
+  - 9
   - 15
-  - 10
-  - 5
-  - 5
+  - 30
+  - 40
+  - 50
   isAccellerating: 0
   isBraking: 0
   canSteer: 0
+  canUpShift: 0
   currentGear: 0
+  currentSpeed: 0
   rigidbody2D: {fileID: 0}
   playerInput: {fileID: 0}
   moveDirection: {x: 0, y: 0}

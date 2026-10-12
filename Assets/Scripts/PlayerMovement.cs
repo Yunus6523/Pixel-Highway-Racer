@@ -13,12 +13,15 @@ public class PlayerMovement : MonoBehaviour
     public float brakePower;
     public float steering;
     public float[] gears;
+    public float[] speedPerGears;
 
     [Header("Car Values")]
     public bool isAccellerating;
     public bool isBraking;
     public bool canSteer;
+    public bool canUpShift;
     public int currentGear;
+    public int currentSpeed;
 
 
     [Header("Player Components")]
@@ -43,8 +46,13 @@ public class PlayerMovement : MonoBehaviour
         isAccellerating = false;
         isBraking = false;
         canSteer = false;
+        canUpShift = false;
+
         accellarationSpeed = gears[0];
+        topSpeed = speedPerGears[0];
+
         currentGear = 0;
+        currentSpeed = 0;
 
         //Initialize Core Components
         rigidbody2D = GetComponent<Rigidbody2D>();
@@ -96,6 +104,7 @@ public class PlayerMovement : MonoBehaviour
         {
             //rigidbody2D.AddForce(-moveDirection / brakePower);
             rigidbody2D.linearDamping = brakePower;
+            previousGear();
         }
         else
         {
@@ -106,6 +115,7 @@ public class PlayerMovement : MonoBehaviour
         if (rigidbody2D.linearVelocity.magnitude >= topSpeed)
         {
             rigidbody2D.linearVelocity = Vector2.ClampMagnitude(rigidbody2D.linearVelocity, topSpeed);
+            canUpShift = true;
             //nextGear();
         }
 
@@ -137,7 +147,10 @@ public class PlayerMovement : MonoBehaviour
 
     void shiftNextGear(InputAction.CallbackContext context)
     {
-        nextGear();
+        if(canUpShift == true)
+        {
+            nextGear();
+        }
     }
 
     void shiftPreviousGear(InputAction.CallbackContext context)
@@ -158,7 +171,21 @@ public class PlayerMovement : MonoBehaviour
                 accellarationSpeed += accellarationSpeed + gears[i];
             }
         }
-        
+
+        if(currentSpeed < speedPerGears.Length - 1)
+        {
+            currentSpeed += 1;
+            Debug.Log($"currentGear switch {currentSpeed}");
+            topSpeed = 0;
+            for (int i = 0; i <= currentSpeed; i++)
+            {
+                Debug.Log(i);
+                topSpeed += topSpeed + speedPerGears[i];
+            }
+
+            canUpShift = false;
+        }
+
         Debug.Log("Switched Gear");
         
     }
@@ -175,6 +202,20 @@ public class PlayerMovement : MonoBehaviour
                 Debug.Log(i);
                 accellarationSpeed += accellarationSpeed + gears[i];
             }
+        }
+
+        if (currentSpeed > 0)
+        {
+            currentSpeed -= 1;
+            Debug.Log($"currentGear switch {currentSpeed}");
+            topSpeed = 0;
+            for (int i = 0; i <= currentSpeed; i++)
+            {
+                Debug.Log(i);
+                topSpeed += topSpeed + speedPerGears[i];
+            }
+
+            canUpShift = false;
         }
     }
 }
