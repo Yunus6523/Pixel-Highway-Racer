@@ -180,7 +180,7 @@ public class PlayerMovement : MonoBehaviour
             for (int i = 0; i <= currentSpeed; i++)
             {
                 Debug.Log(i);
-                topSpeed += topSpeed + speedPerGears[i];
+                topSpeed = topSpeed + speedPerGears[i];
             }
 
             canUpShift = false;
