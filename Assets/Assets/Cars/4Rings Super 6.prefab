@@ -420,16 +420,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0fee51f9e0ba2246bb6a27a13c72daa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  topSpeed: 50
-  accellarationSpeed: 10
+  topSpeed: 0
+  accellarationSpeed: 0
   brakePower: 5
   steering: 5
-  gears: []
+  gears:
+  - 10
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  speedPerGears:
+  - 50
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
   isAccellerating: 0
   isBraking: 0
   canSteer: 0
+  canUpShift: 0
   currentGear: 0
-  rigidbody2D: {fileID: 0}
+  currentSpeed: 0
+  rigidbody2D: {fileID: 6072410609453525737}
   playerInput: {fileID: 0}
   moveDirection: {x: 0, y: 0}
   throttleAction:

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using Unity.Cinemachine;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -25,6 +26,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] bool unlockedBMKK2;
     [SerializeField] int BMKK2;
 
+    [Header("Highscore")]
+    public TextMeshProUGUI counter;
+    public int count;
+
     private void Awake()
     {
         instance = this;
@@ -32,6 +37,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        counter.SetText(count.ToString());
         BMKK2 = 0;
     }
 
@@ -52,6 +58,11 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("BMK K2 is locked");
         }
+    }
+
+    private void FixedUpdate()
+    {
+
     }
 
     public void setCameraTarget()
