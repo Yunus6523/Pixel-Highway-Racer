@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public List<GameObject> carList;
     public GameObject selectedCar;
     public GameObject spawnedCar;
+    public int carIndex;
 
     [Header("Progress")]
     [SerializeField] bool unlockedBMKK2;
@@ -31,8 +32,13 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        selectedCar = carList[Random.Range(0,carList.Count-1)];
         BMKK2 = 0;
+    }
+
+    public void setCarIndex(int index)
+    {
+        carIndex = index;
+        selectedCar = carList[carIndex];
     }
 
     private void Update()
@@ -50,8 +56,8 @@ public class GameManager : MonoBehaviour
 
     public void setCameraTarget()
     {
-        vCam.Target.TrackingTarget = spawnedCar.transform;
-        //camera.GetComponent<CameraFollow>().target = spawnedCar.transform;
+        //vCam.Target.TrackingTarget = spawnedCar.transform;
+        camera.GetComponent<CameraFollow>().target = spawnedCar.transform;
     }
 
     public void spawnSampleCar()
