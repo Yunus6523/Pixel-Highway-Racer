@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.Cinemachine;
@@ -22,13 +23,21 @@ public class GameManager : MonoBehaviour
     public GameObject spawnedCar;
     public int carIndex;
 
+    [Header("Enemy Spawn")]
+    [SerializeField] GameObject copCar;
+
     [Header("Progress")]
     [SerializeField] bool unlockedBMKK2;
     [SerializeField] int BMKK2;
 
     [Header("Highscore")]
     public TextMeshProUGUI counter;
-    public int count;
+    public float count;
+    public float distanceHighscoreIntervall;
+    public float currentDistanceCounter;
+
+    [Header("Chase System")]
+    public GameObject gameOverScreen;
 
     private void Awake()
     {
@@ -37,6 +46,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        gameOverScreen.SetActive(false);
         counter.SetText(count.ToString());
         BMKK2 = 0;
     }
@@ -57,6 +67,18 @@ public class GameManager : MonoBehaviour
         else if (BMKK2 < 1)
         {
             Debug.Log("BMK K2 is locked");
+        }
+
+        updateHighScoreCounter();
+    }
+
+    void updateHighScoreCounter()
+    {
+        if(spawnedCar.transform.position.x > currentDistanceCounter)
+        {
+            currentDistanceCounter += distanceHighscoreIntervall;
+            count++;
+            counter.SetText(count.ToString());
         }
     }
 
@@ -87,5 +109,28 @@ public class GameManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("BMK K2", 1);
         }
+    }
+
+    public void spawnCop()
+    {
+        StartCoroutine(startCopTimer());
+    }
+
+    IEnumerator startCopTimer()
+    {
+        yield return new WaitForSeconds(5f);
+        Instantiate(copCar, spawnPoint);
+    }
+
+    public void gameOver()
+    {
+        Destroy(spawnedCar);
+        gameOverScreen.SetActive(true);
+        Time.timeScale = 0.5f;
+    }
+
+    public void endGame()
+    {
+        Application.Quit();
     }
 }

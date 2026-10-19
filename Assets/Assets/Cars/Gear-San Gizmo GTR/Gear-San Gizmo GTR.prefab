@@ -328,12 +328,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0fee51f9e0ba2246bb6a27a13c72daa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  topSpeed: 50
-  accellarationSpeed: 10
+  topSpeed: 0
+  accellarationSpeed: 0
   brakePower: 5
   steering: 5
-  gears: []
-  speedPerGears: []
+  gears:
+  - 10
+  - 10
+  speedPerGears:
+  - 5
+  - 5
   isAccellerating: 0
   isBraking: 0
   canSteer: 0

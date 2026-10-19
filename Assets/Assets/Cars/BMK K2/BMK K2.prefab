@@ -354,7 +354,7 @@ MonoBehaviour:
   canUpShift: 0
   currentGear: 0
   currentSpeed: 0
-  rigidbody2D: {fileID: 6072410609453525737}
+  rigidbody2D: {fileID: 0}
   playerInput: {fileID: 0}
   moveDirection: {x: 0, y: 0}
   throttleAction:
