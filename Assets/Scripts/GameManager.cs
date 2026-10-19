@@ -69,6 +69,8 @@ public class GameManager : MonoBehaviour
             Debug.Log("BMK K2 is locked");
         }
 
+        progress();
+
         updateHighScoreCounter();
     }
 
@@ -109,6 +111,8 @@ public class GameManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("BMK K2", 1);
         }
+
+        PlayerPrefs.SetFloat("Highscore", count);
     }
 
     public void spawnCop()
