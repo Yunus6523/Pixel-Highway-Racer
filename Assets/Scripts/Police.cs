@@ -27,7 +27,7 @@ public class Police : MonoBehaviour
         transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
 
         distance = transform.position - target.position;
-        if(distance.x > 2)
+        if(distance.x <= -1)
         {
             Debug.Log("arrested suspect");
             speed = 0;

@@ -14,6 +14,6 @@ public class HighscoreManager : MonoBehaviour
 
     void setHighscore()
     {
-        number.ToString(count.ToString());
+        count.SetText(number.ToString());
     }
 }

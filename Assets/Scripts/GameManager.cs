@@ -23,8 +23,9 @@ public class GameManager : MonoBehaviour
     public GameObject spawnedCar;
     public int carIndex;
 
-    [Header("Enemy Spawn")]
+    [Header("Chase System")]
     [SerializeField] GameObject copCar;
+    [SerializeField] ChaseManager chaseManager;
 
     [Header("Progress")]
     [SerializeField] bool unlockedBMKK2;
@@ -38,6 +39,8 @@ public class GameManager : MonoBehaviour
 
     [Header("Chase System")]
     public GameObject gameOverScreen;
+    public float chaseDistanceIntervall;
+    public float chaseDistanceCounter;
 
     private void Awake()
     {
@@ -69,9 +72,11 @@ public class GameManager : MonoBehaviour
             Debug.Log("BMK K2 is locked");
         }
 
-        progress();
-
         updateHighScoreCounter();
+
+        updateChaseSystem();
+
+        progress();
     }
 
     void updateHighScoreCounter()
@@ -81,6 +86,20 @@ public class GameManager : MonoBehaviour
             currentDistanceCounter += distanceHighscoreIntervall;
             count++;
             counter.SetText(count.ToString());
+        }
+    }
+
+    void updateChaseSystem()
+    {
+        if(chaseManager.levelCapped == false)
+        {
+            if (spawnedCar.transform.position.x > chaseDistanceCounter)
+            {
+                chaseDistanceCounter += chaseDistanceIntervall;
+                chaseManager.currentLevel++;
+                chaseDistanceIntervall += 100;
+                chaseManager.startChase();
+            }
         }
     }
 
@@ -124,6 +143,7 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(5f);
         Instantiate(copCar, spawnPoint);
+        chaseManager.actualAmount++;
     }
 
     public void gameOver()
