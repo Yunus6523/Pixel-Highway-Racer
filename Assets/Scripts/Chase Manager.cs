@@ -1,24 +1,30 @@
 using System.Collections;
+using System.Collections.Generic;
 using Unity.Tutorials.Editor;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class ChaseManager : MonoBehaviour
 {
     [Header("Police")]
-    public Police police;
     public bool chase;
     public bool canSpawn;
     public float spawnableAmount;
     public float actualAmount;
+    public List<GameObject> countOfCops;
 
     [Header("Arrest")]
-    [SerializeField]public float arrestTime;
+    [SerializeField] public float arrestTime;
+    [SerializeField] bool isBeingArrested;
+    Coroutine arrestCoroutine;
 
     [Header("Wanted Level")]
     [SerializeField] public int currentLevel;
     [SerializeField] public int maxLevel;
     [SerializeField] public bool levelCapped;
+
+    [SerializeField] GameObject player;
 
     //public float amountOfCops;
     void Start()
@@ -28,23 +34,44 @@ public class ChaseManager : MonoBehaviour
         chase = false;
         spawnableAmount = 3;
         actualAmount = 0;
+
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-       if(chase == true)
+        if (chase == true)
         {
             canSpawn = true;
             if (actualAmount <= spawnableAmount)
             {
                 GameManager.instance.spawnCop();
             }
-            else if(actualAmount >= spawnableAmount)
+            else if (actualAmount >= spawnableAmount)
             {
                 canSpawn = false;
             }
         }
+
+        player = GameManager.instance.spawnedCar;
+
+        bool shouldArrest = false;
+        foreach (GameObject police in countOfCops)
+        {
+            float distance = Vector2.Distance(player.transform.position, police.transform.position);
+            if (distance < 1)
+            {
+                shouldArrest = true;
+                arrest();
+                break;
+            }
+        }
+        if (shouldArrest == false)
+        {
+            cancelArrest();
+        }
+
     }
 
     public void startChase()
@@ -54,16 +81,33 @@ public class ChaseManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (police.distance.x <= -1)
+
+    }
+
+    public void arrest()
+    {
+        if (isBeingArrested == false)
         {
-            StartCoroutine(initiateArrest());
-            Debug.Log("Starting Arrest!");
+        Debug.Log("Starting Arrest");
+            arrestCoroutine = StartCoroutine(initiateArrest());
+            isBeingArrested = true;
+        }
+    }
+
+    public void cancelArrest()
+    {
+        if (isBeingArrested == true)
+        {
+        Debug.Log("Caneling Arrest");
+            StopCoroutine(arrestCoroutine);
+            isBeingArrested = false;
         }
     }
 
     IEnumerator initiateArrest()
     {
         yield return new WaitForSeconds(arrestTime);
+        Debug.Log("Suspect Arrested");
         GameManager.instance.gameOver();
     }
 }

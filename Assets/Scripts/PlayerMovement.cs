@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -27,6 +28,14 @@ public class PlayerMovement : MonoBehaviour
     [Header("Player Components")]
     [SerializeField] private Rigidbody2D rigidbody2D;
     [SerializeField] private PlayerInput playerInput;
+    public Animator steeringWheel;
+    public string[] animationStrings;
+
+    [Header("Dashboard")]
+    [SerializeField] private float speedDisplay;
+    [SerializeField] private TextMeshProUGUI speedDisplayText;
+    [SerializeField] private float gearDisplay;
+    [SerializeField] private TextMeshProUGUI gearDisplayText;
 
 
     [Header("Direction")]
@@ -53,6 +62,12 @@ public class PlayerMovement : MonoBehaviour
 
         currentGear = 0;
         currentSpeed = 0;
+
+        steeringWheel.Play(animationStrings[0]);
+
+        gearDisplay = 1f;
+        speedDisplay = 0f;
+
 
         //Initialize Core Components
         rigidbody2D = GetComponent<Rigidbody2D>();
@@ -85,10 +100,13 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        
         Vector2 input = steerAction.ReadValue<Vector2>();
         float horizontalInput = input.x;
         float verticalInput = input.y;
-        
+
+        speedDisplay = rigidbody2D.linearVelocity.x;
+        speedDisplayText.SetText(speedDisplay.ToString("F0"));
 
         if (isAccellerating == true)
         {
@@ -116,12 +134,25 @@ public class PlayerMovement : MonoBehaviour
         {
             rigidbody2D.linearVelocity = Vector2.ClampMagnitude(rigidbody2D.linearVelocity, topSpeed);
             canUpShift = true;
+            
             //nextGear();
         }
 
         if(rigidbody2D.linearVelocity.magnitude >= 0.01)
         {
             rigidbody2D.AddForce(Vector2.up * verticalInput * steering);
+            if(verticalInput > 0.1f)
+            {
+                steeringWheel.Play(animationStrings[6]);
+            }
+            if (verticalInput < -0.1f)
+            {
+                steeringWheel.Play(animationStrings[4]);
+            }
+            if(verticalInput == 0f)
+            {
+                steeringWheel.Play(animationStrings[0]);
+            }
         }
     }
 
@@ -150,6 +181,7 @@ public class PlayerMovement : MonoBehaviour
         if(canUpShift == true)
         {
             nextGear();
+            steeringWheel.Play(animationStrings[1]);
         }
     }
 
@@ -163,30 +195,33 @@ public class PlayerMovement : MonoBehaviour
         if(currentGear < gears.Length-1)
         {
             currentGear += 1;
-            Debug.Log($"currentGear switch {currentGear}");
+            //Debug.Log($"currentGear switch {currentGear}");
             accellarationSpeed = 0;
+            gearDisplay++;
+            gearDisplayText.SetText(gearDisplay.ToString());
             for (int i = 0; i <= currentGear; i++)
             {
-                Debug.Log(i);
+                //Debug.Log(i);
                 accellarationSpeed += accellarationSpeed + gears[i];
+                
             }
         }
 
         if(currentSpeed < speedPerGears.Length - 1)
         {
             currentSpeed += 1;
-            Debug.Log($"currentGear switch {currentSpeed}");
+            //Debug.Log($"currentGear switch {currentSpeed}");
             topSpeed = 0;
             for (int i = 0; i <= currentSpeed; i++)
             {
-                Debug.Log(i);
+                //Debug.Log(i);
                 topSpeed = topSpeed + speedPerGears[i];
             }
 
             canUpShift = false;
         }
 
-        Debug.Log("Switched Gear");
+        //Debug.Log("Switched Gear");
         
     }
 
@@ -194,20 +229,23 @@ public class PlayerMovement : MonoBehaviour
     {
         if(currentGear > 0)
         {
+            gearDisplay--;
+            gearDisplayText.SetText(gearDisplay.ToString());
             currentGear -= 1;
-            Debug.Log($"currentGear switch {currentGear}");
+            //Debug.Log($"currentGear switch {currentGear}");
             accellarationSpeed = 0;
             for (int i = 0; i <= currentGear; i++)
             {
                 Debug.Log(i);
                 accellarationSpeed += accellarationSpeed + gears[i];
+                steeringWheel.Play(animationStrings[2]);
             }
         }
 
         if (currentSpeed > 0)
         {
             currentSpeed -= 1;
-            Debug.Log($"currentGear switch {currentSpeed}");
+            //Debug.Log($"currentGear switch {currentSpeed}");
             topSpeed = 0;
             for (int i = 0; i <= currentSpeed; i++)
             {

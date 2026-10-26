@@ -13,6 +13,9 @@ public class GameManager : MonoBehaviour
     public CinemachineCamera vCam;
     public Camera camera;
 
+    [Header("Car Ui")]
+    public Transform uiSpawnPoint;
+
     [Header("Sample Car Spawn")]
     //public GameObject pandaCivilTypeR;
     public Transform spawnPoint;
@@ -65,11 +68,11 @@ public class GameManager : MonoBehaviour
         BMKK2 = PlayerPrefs.GetInt("BMK K2");
         if (BMKK2 == 1)
         {
-            Debug.Log("BMK K2 is unlocked");
+            //Debug.Log("BMK K2 is unlocked");
         }
         else if (BMKK2 < 1)
         {
-            Debug.Log("BMK K2 is locked");
+            //Debug.Log("BMK K2 is locked");
         }
 
         updateHighScoreCounter();
@@ -138,7 +141,9 @@ public class GameManager : MonoBehaviour
     {
         if(chaseManager.canSpawn == true)
         {
-            Instantiate(copCar, spawnPoint);
+            GameObject spawnedCop = Instantiate(copCar, spawnPoint);
+            spawnedCop.GetComponent<Police>().chaseManager = chaseManager;
+            chaseManager.countOfCops.Add(spawnedCop);
             chaseManager.actualAmount++;
         }
     }
