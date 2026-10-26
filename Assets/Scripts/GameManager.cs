@@ -136,14 +136,11 @@ public class GameManager : MonoBehaviour
 
     public void spawnCop()
     {
-        StartCoroutine(startCopTimer());
-    }
-
-    IEnumerator startCopTimer()
-    {
-        yield return new WaitForSeconds(5f);
-        Instantiate(copCar, spawnPoint);
-        chaseManager.actualAmount++;
+        if(chaseManager.canSpawn == true)
+        {
+            Instantiate(copCar, spawnPoint);
+            chaseManager.actualAmount++;
+        }
     }
 
     public void gameOver()

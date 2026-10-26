@@ -38,16 +38,10 @@ public class ChaseManager : MonoBehaviour
             canSpawn = true;
             if (actualAmount <= spawnableAmount)
             {
-                canSpawn = true;
-                if(canSpawn == true)
-                {
-                    Debug.Log("is spawning");
-                    GameManager.instance.spawnCop();
-                }
+                GameManager.instance.spawnCop();
             }
-            else if(actualAmount > spawnableAmount)
+            else if(actualAmount >= spawnableAmount)
             {
-                Debug.Log("is not spawning");
                 canSpawn = false;
             }
         }
