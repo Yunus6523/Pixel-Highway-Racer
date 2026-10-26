@@ -32,7 +32,7 @@ public class ChaseManager : MonoBehaviour
         currentLevel = 0;
         maxLevel = 5;
         chase = false;
-        spawnableAmount = 3;
+        spawnableAmount = 2;
         actualAmount = 0;
 
         
@@ -72,6 +72,27 @@ public class ChaseManager : MonoBehaviour
             cancelArrest();
         }
 
+        switch (currentLevel)
+        {
+            case 2:
+                spawnableAmount = 5;
+                break;
+            case 3:
+                spawnableAmount = 8;
+                break;
+            case 4:
+                spawnableAmount = 10;
+                break;
+            case 5:
+                spawnableAmount = 15;
+                break;
+        }
+
+        if(currentLevel == 5)
+        {
+            levelCapped = true;
+        }
+
     }
 
     public void startChase()
@@ -109,5 +130,10 @@ public class ChaseManager : MonoBehaviour
         yield return new WaitForSeconds(arrestTime);
         Debug.Log("Suspect Arrested");
         GameManager.instance.gameOver();
+    }
+
+    public void addWantedLevel()
+    {
+        
     }
 }
