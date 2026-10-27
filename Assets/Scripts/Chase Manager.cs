@@ -132,8 +132,12 @@ public class ChaseManager : MonoBehaviour
         GameManager.instance.gameOver();
     }
 
-    public void addWantedLevel()
+    public void destroyAllCruisers()
     {
-        
+        foreach(GameObject police in countOfCops)
+        {
+            Destroy(police);
+            countOfCops.Clear();
+        }
     }
 }

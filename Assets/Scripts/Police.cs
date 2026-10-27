@@ -3,9 +3,14 @@ using UnityEngine.EventSystems;
 
 public class Police : MonoBehaviour
 {
+    [Header("Cop Car Component")]
     public float supposedSpeed;
     public float speed;
     public float steeringSpeed;
+    public float breakingPower;
+
+
+    [Header("Movement Component")]
     public Transform target;
     private Vector2 moveDirection;
     private Vector2 up;
@@ -24,7 +29,6 @@ public class Police : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>();
 
         moveDirection = new Vector2 (1f, 0f);
-        supposedSpeed = 8f;
         speed = supposedSpeed;
 
         up = new Vector2 (0f, 2f);
@@ -35,13 +39,15 @@ public class Police : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        speed = supposedSpeed;
+
         transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
 
         distance = Vector2.Distance(transform.position, target.position);
 
         if (distance < 1)
         {
-            speed = 0f;
+            speed = rigidbody.linearDamping + breakingPower;
         }
         else if (distance > 1)
         {
@@ -54,8 +60,10 @@ public class Police : MonoBehaviour
         RaycastHit2D checkRight = Physics2D.Raycast(transform.position, -Vector2.up);
         checkRight.distance = 2f;
 
+
         if (checkForward)
         {
+            speed = rigidbody.linearDamping + breakingPower;
             int random = Random.Range(0, 2);
             if (random == 0)
             {

@@ -236,7 +236,7 @@ MonoBehaviour:
   spawnableAmount: 0
   actualAmount: 0
   countOfCops: []
-  arrestTime: 10
+  arrestTime: 5
   isBeingArrested: 0
   currentLevel: 0
   maxLevel: 0
@@ -315,6 +315,7 @@ MonoBehaviour:
   spawnedCar: {fileID: 1992522382}
   carIndex: 0
   copCar: {fileID: 3208449665404507506, guid: 81df7d16811fffa48a70171c889326c8, type: 3}
+  spawnedCop: {fileID: 0}
   chaseManager: {fileID: 320880911}
   unlockedBMKK2: 0
   BMKK2: 0
@@ -6945,7 +6946,7 @@ Tilemap:
     m_Data: {fileID: 1059136275, guid: e517a78a471c05c49ada24313fdf6ffa, type: 3}
   m_TileMatrixArray:
   - serializedVersion: 2
-    m_RefCount: 581
+    m_RefCount: 540
     m_Data:
       e00: 1
       e01: 0

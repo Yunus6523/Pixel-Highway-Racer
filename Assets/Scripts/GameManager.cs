@@ -28,6 +28,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Chase System")]
     [SerializeField] GameObject copCar;
+    [SerializeField] GameObject spawnedCop;
     [SerializeField] ChaseManager chaseManager;
 
     [Header("Progress")]
@@ -141,7 +142,7 @@ public class GameManager : MonoBehaviour
     {
         if(chaseManager.canSpawn == true)
         {
-            GameObject spawnedCop = Instantiate(copCar, spawnPoint);
+            spawnedCop = Instantiate(copCar, spawnPoint);
             spawnedCop.GetComponent<Police>().chaseManager = chaseManager;
             chaseManager.countOfCops.Add(spawnedCop);
             chaseManager.actualAmount++;
@@ -152,6 +153,7 @@ public class GameManager : MonoBehaviour
     {
         Destroy(spawnedCar);
         gameOverScreen.SetActive(true);
+        chaseManager.destroyAllCruisers();
         Time.timeScale = 0.5f;
     }
 
