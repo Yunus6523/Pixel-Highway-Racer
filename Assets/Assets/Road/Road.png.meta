@@ -152,8 +152,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a6360d996ca4ad3429d7c34c4e9f28c5
-      internalID: -1126127382
+      spriteID: c43228d7588f70346ac314d6c643e596
+      internalID: -1168055637
       vertices: []
       indices: 
       edges: []
@@ -174,8 +174,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6a0fd8df26d52b44f82e6cb3d9beb79f
-      internalID: -1359777046
+      spriteID: bf464ff71bcd34e4fb6c6329b5f6a289
+      internalID: -183182290
       vertices: []
       indices: 
       edges: []
@@ -196,8 +196,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2c92d6a2ec65d0a43a6fb58f8eda4c4f
-      internalID: 1059136275
+      spriteID: 3850b00c26e9c5241a15971a71ac8861
+      internalID: 1266279991
       vertices: []
       indices: 
       edges: []
@@ -206,7 +206,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 53b1fe221b5aec144bfa396e1fc4af1a
+    spriteID: 7daab61d6b0c4c045b74348ae755e3ac
     internalID: 0
     vertices: []
     indices: 
@@ -219,9 +219,9 @@ TextureImporter:
         value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":16.0,"y":16.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       Road_0: -7011661911796687584
-      Road_1: -1126127382
-      Road_2: -1359777046
-      Road_3: 1059136275
+      Road_1: -1168055637
+      Road_2: -183182290
+      Road_3: 1266279991
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
