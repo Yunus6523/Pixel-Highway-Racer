@@ -22,6 +22,9 @@ public class NPCCars : MonoBehaviour
     [Header("Speed Index")]
     [SerializeField] int randomizedIndex;
 
+    [Header("Player")]
+    [SerializeField] GameObject player;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -34,7 +37,15 @@ public class NPCCars : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        player = GameManager.instance.spawnedCar;
+        var distance = Vector2.Distance(transform.position, player.transform.position);
+
+        Debug.Log(distance);
+
+        if(distance >= 100)
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     private void FixedUpdate()
