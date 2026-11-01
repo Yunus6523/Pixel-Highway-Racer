@@ -61,10 +61,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d758eb017ad69ba45b4cdc756b852e3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WorldChunk
-  carPrefab: {fileID: 6649114939835635160, guid: 1e3ff49a60c1cf9479443faec12659ec, type: 3}
+  carPrefab: {fileID: 0}
+  carList:
+  - {fileID: 6649114939835635160, guid: 1e3ff49a60c1cf9479443faec12659ec, type: 3}
+  - {fileID: 581180341779337504, guid: d7163c41c4d31894988cc9f9fcff1bdf, type: 3}
+  carIndex: 0
   spawnPointOne: {fileID: 7871217594289712436}
   spawnPointTwo: {fileID: 5539775453723881481}
   spawnPointThree: {fileID: 6143815622438004440}
+  randomOne: 0
+  randomTwo: 0
+  randomThree: 0
 --- !u!1 &6590856586437378916
 GameObject:
   m_ObjectHideFlags: 0

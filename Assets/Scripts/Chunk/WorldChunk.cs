@@ -4,7 +4,8 @@ using UnityEngine;
 public class WorldChunk : MonoBehaviour
 {
     [Header("NPC Car Prefab")]
-    [SerializeField] GameObject carPrefab;
+    [SerializeField] GameObject[] carList;
+    [SerializeField] int carIndex;
 
     [Header("Spawn Transform")]
     [SerializeField] Transform spawnPointOne;
@@ -15,6 +16,7 @@ public class WorldChunk : MonoBehaviour
     [SerializeField] int randomOne;
     [SerializeField] int randomTwo;
     [SerializeField] int randomThree;
+
     private void Start()
     {
         randomOne = Random.Range(0, 5);
@@ -30,7 +32,8 @@ public class WorldChunk : MonoBehaviour
     {
         if(randomOne == 1)
         {
-            Instantiate(carPrefab, spawnPointOne);
+            carIndex = Random.Range(0, 2);
+            Instantiate(carList[carIndex], spawnPointOne);
         }
     }
 
@@ -38,7 +41,8 @@ public class WorldChunk : MonoBehaviour
     {
         if(randomTwo == 1)
         {
-            Instantiate(carPrefab, spawnPointTwo);
+            carIndex = Random.Range(0, 2);
+            Instantiate(carList[carIndex], spawnPointTwo);
         } 
     }
 
@@ -46,7 +50,8 @@ public class WorldChunk : MonoBehaviour
     {
         if(randomThree == 1)
         {
-            Instantiate(carPrefab, spawnPointThree);
+            carIndex = Random.Range(0, 2);
+            Instantiate(carList[carIndex], spawnPointThree);
         }
     }
 }

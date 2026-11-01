@@ -333,7 +333,7 @@ MonoBehaviour:
   topSpeed: 0
   accellarationSpeed: 0
   brakePower: 15
-  steering: 5
+  steering: 20
   gears:
   - 50
   - 45
