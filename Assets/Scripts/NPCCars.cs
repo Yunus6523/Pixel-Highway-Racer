@@ -7,6 +7,14 @@ public class NPCCars : MonoBehaviour
     [SerializeField] Rigidbody2D rigidbody;
     [SerializeField] Vector2 moveDirection;
 
+    [Header("Raycast")]
+    [SerializeField] Vector2 rayCastOrigin;
+
+    [Header("Steering")]
+    [SerializeField] Vector2 up;
+    [SerializeField] Vector2 down;
+    [SerializeField] float steeringSpeed;
+
     [Header("Speed")]
     [SerializeField] float twentyKMH = 5f;
     [SerializeField] float thirtyKMH = 10f;
@@ -32,6 +40,11 @@ public class NPCCars : MonoBehaviour
         moveDirection = new Vector2(1f, 0f);
 
         randomizedIndex = Random.Range(0, 5);
+
+        up = new Vector2(0f, 1f);
+        down = new Vector2(0f, -1f);
+
+        Debug.DrawRay(rayCastOrigin, moveDirection, Color.green);
     }
 
     // Update is called once per frame
@@ -45,6 +58,30 @@ public class NPCCars : MonoBehaviour
         if(distance >= 100)
         {
             Destroy(this.gameObject);
+        }
+
+        //Direction
+        RaycastHit2D checkForward = Physics2D.Raycast(transform.position, Vector2.right);
+        checkForward.distance = 5f;
+        RaycastHit2D checkLeft = Physics2D.Raycast(transform.position, Vector2.up);
+        checkLeft.distance = 2f;
+        RaycastHit2D checkRight = Physics2D.Raycast(transform.position, -Vector2.up);
+        checkRight.distance = 2f;
+
+        
+
+        if (checkForward)
+        {
+            int random = Random.Range(0, 2);
+            if (random == 0)
+            {
+                rigidbody.linearDamping = 5f;
+                Debug.Log("BREAKING!");
+            }
+            else
+            {
+                rigidbody.linearDamping = 0f;
+            }
         }
     }
 

@@ -55,11 +55,13 @@ public class Police : MonoBehaviour
         }
 
         RaycastHit2D checkForward = Physics2D.Raycast(transform.position, Vector2.right);
+        checkForward.distance = 10f;
         RaycastHit2D checkLeft = Physics2D.Raycast(transform.position, Vector2.up);
         checkLeft.distance = 2f;
         RaycastHit2D checkRight = Physics2D.Raycast(transform.position, -Vector2.up);
         checkRight.distance = 2f;
 
+        Debug.DrawRay(transform.position, moveDirection, Color.green);
 
         if (checkForward)
         {

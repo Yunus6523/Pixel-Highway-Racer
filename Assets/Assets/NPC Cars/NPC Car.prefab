@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7313213880144446372}
   - component: {fileID: 9012458568403239630}
   - component: {fileID: 7630584489811463377}
+  - component: {fileID: 2704517170514876011}
   m_Layer: 0
   m_Name: NPC Car
   m_TagString: Untagged
@@ -108,6 +109,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NPCCars
   rigidbody: {fileID: 0}
   moveDirection: {x: 0, y: 0}
+  rayCastOrigin: {x: 3, y: 0}
+  up: {x: 0, y: 0}
+  down: {x: 0, y: 0}
+  steeringSpeed: 0
   twentyKMH: 5
   thirtyKMH: 10
   fiftyKMH: 15
@@ -144,4 +149,50 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
+--- !u!61 &2704517170514876011
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6649114939835635160}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 6, y: 3}
+    newSize: {x: 6, y: 3}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 6, y: 3}
+  m_EdgeRadius: 0

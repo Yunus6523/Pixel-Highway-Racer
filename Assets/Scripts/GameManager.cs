@@ -16,8 +16,10 @@ public class GameManager : MonoBehaviour
     [Header("Car Ui")]
     public Transform uiSpawnPoint;
 
-    [Header("Sample Car Spawn")]
-    //public GameObject pandaCivilTypeR;
+    [Header("Cars")]
+    public GameObject pandaCivilTypeR;
+    public GameObject bmkK2;
+    public GameObject fourRingsSuperFour;
     public Transform spawnPoint;
 
     [Header("Modular Car Spawn")]
@@ -56,6 +58,10 @@ public class GameManager : MonoBehaviour
         gameOverScreen.SetActive(false);
         counter.SetText(count.ToString());
         BMKK2 = 0;
+
+        pandaCivilTypeR.SetActive(true);
+        bmkK2.SetActive(false);
+        fourRingsSuperFour.SetActive(false);
     }
 
     public void setCarIndex(int index)

@@ -23,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
     public bool canUpShift;
     public int currentGear;
     public int currentSpeed;
+    [SerializeField] float verticalInput;
+    [SerializeField] Vector2 input;
 
 
     [Header("Player Components")]
@@ -101,9 +103,9 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         
-        Vector2 input = steerAction.ReadValue<Vector2>();
+        input = steerAction.ReadValue<Vector2>();
         float horizontalInput = input.x;
-        float verticalInput = input.y;
+        verticalInput = input.y;
 
         speedDisplay = rigidbody2D.linearVelocity.x;
         speedDisplayText.SetText(speedDisplay.ToString("F0"));
@@ -182,6 +184,14 @@ public class PlayerMovement : MonoBehaviour
         {
             nextGear();
             steeringWheel.Play(animationStrings[1]);
+            if(verticalInput > 0.1f)
+            {
+                steeringWheel.Play(animationStrings[8]);
+            }
+            else if (verticalInput < 0.1f)
+            {
+                steeringWheel.Play(animationStrings[5]);
+            }
         }
     }
 
