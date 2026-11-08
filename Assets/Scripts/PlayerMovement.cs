@@ -50,6 +50,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private InputAction steerAction;
     [SerializeField] private InputAction shiftUpAction;
     [SerializeField] private InputAction shiftDownAction;
+    [SerializeField] private InputAction pauseAction;
 
     void Start()
     {
@@ -84,6 +85,7 @@ public class PlayerMovement : MonoBehaviour
         steerAction = playerInput.actions.FindAction("Steer");
         shiftUpAction = playerInput.actions.FindAction("Shift Up");
         shiftDownAction = playerInput.actions.FindAction("Shift Down");
+        pauseAction = playerInput.actions.FindAction("Pause");
 
         //Initialize Input
         throttleAction.performed += throttle;
@@ -92,6 +94,7 @@ public class PlayerMovement : MonoBehaviour
         brakeAction.canceled += releaseBrake;
         shiftUpAction.performed += shiftNextGear;
         shiftDownAction.performed += shiftPreviousGear;
+        pauseAction.performed += pauseGame;
     }
 
     // Update is called once per frame
@@ -198,6 +201,11 @@ public class PlayerMovement : MonoBehaviour
     void shiftPreviousGear(InputAction.CallbackContext context)
     {
         previousGear();
+    }
+
+    void pauseGame(InputAction.CallbackContext context)
+    {
+        GameManager.instance.togglePause();
     }
 
     void nextGear()

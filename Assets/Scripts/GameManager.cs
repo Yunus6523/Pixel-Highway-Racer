@@ -9,6 +9,11 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    [Header("Gameplay")]
+    [SerializeField] public bool isPaused;
+    [SerializeField] SceneLoader scene;
+    [SerializeField] GameObject pauseScreen;
+
     [Header("Camera")]
     public CinemachineCamera vCam;
     public Camera camera;
@@ -18,6 +23,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Cars")]
     public GameObject pandaCivilTypeR;
+    public GameObject pandaNext;
     public GameObject bmkK2;
     public GameObject fourRingsSuperFour;
     public Transform spawnPoint;
@@ -32,10 +38,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject copCar;
     [SerializeField] GameObject spawnedCop;
     [SerializeField] ChaseManager chaseManager;
-
-    [Header("Progress")]
-    [SerializeField] bool unlockedBMKK2;
-    [SerializeField] int BMKK2;
 
     [Header("Highscore")]
     public TextMeshProUGUI counter;
@@ -57,11 +59,13 @@ public class GameManager : MonoBehaviour
     {
         gameOverScreen.SetActive(false);
         counter.SetText(count.ToString());
-        BMKK2 = 0;
 
         pandaCivilTypeR.SetActive(true);
         bmkK2.SetActive(false);
         fourRingsSuperFour.SetActive(false);
+
+        isPaused = false;
+        pauseScreen.SetActive(false);
     }
 
     public void setCarIndex(int index)
@@ -72,16 +76,7 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        BMKK2 = PlayerPrefs.GetInt("BMK K2");
-        if (BMKK2 == 1)
-        {
-            //Debug.Log("BMK K2 is unlocked");
-        }
-        else if (BMKK2 < 1)
-        {
-            //Debug.Log("BMK K2 is locked");
-        }
-
+        
         updateHighScoreCounter();
 
         updateChaseSystem();
@@ -129,18 +124,8 @@ public class GameManager : MonoBehaviour
         spawnedCar = Instantiate(selectedCar, spawnPoint);
     }
 
-    public void toggleUnlockable()
-    {
-        unlockedBMKK2 =! unlockedBMKK2;
-    }
-
     public void progress()
     {
-        if(unlockedBMKK2 == true)
-        {
-            PlayerPrefs.SetInt("BMK K2", 1);
-        }
-
         PlayerPrefs.SetFloat("Highscore", count);
     }
 
@@ -165,6 +150,21 @@ public class GameManager : MonoBehaviour
 
     public void endGame()
     {
-        Application.Quit();
+        scene.loadScene();
+    }
+
+    public void togglePause()
+    {
+        isPaused = ! isPaused;
+        if(isPaused == true)
+        {
+            Time.timeScale = 0;
+            pauseScreen.SetActive(true);
+        }
+        if(isPaused == false)
+        {
+            Time.timeScale = 1f;
+            pauseScreen.SetActive(false);
+        }
     }
 }
