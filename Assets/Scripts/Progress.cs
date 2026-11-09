@@ -19,7 +19,7 @@ public class Progress : MonoBehaviour
     [SerializeField] bool gearSanGizmoGTRUnlocked;
     [SerializeField] int gearSanGizmoGTRIndex;
 
-    [Header("Rivalry Cars")]
+    [Header("Rival Cars")]
     //Yuriko's MZ-5
     [SerializeField] bool yurikosMZ5Unlocked;
     [SerializeField] int yurikosMZ5Index;
@@ -28,8 +28,10 @@ public class Progress : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        BMKIndex = PlayerPrefs.GetInt("BMK");
         PlayerPrefs.SetInt("BMK", BMKIndex);
+        //BMKIndex = PlayerPrefs.GetInt("BMK");
+
+        PlayerPrefs.SetInt("MZ-7", silverbirdMZ7Index);
     }
 
     // Update is called once per frame
@@ -43,6 +45,23 @@ public class Progress : MonoBehaviour
         if (PlayerPrefs.GetInt("BMK") == 1)
         {
             BMKUnlocked = true;
+            GameManager.instance.pandaNext.SetActive(true);
+        }
+
+        if(GameManager.instance.count >= 20)
+        {
+            silverbirdMZ7Index = 1;
+        }
+
+        if (PlayerPrefs.GetInt("MZ-7") == 0)
+        {
+            silverbirdMZ7Unlocked = false;
+            GameManager.instance.bmkNext.SetActive(false);
+        }
+        if (PlayerPrefs.GetInt("MZ-7") == 1)
+        {
+            silverbirdMZ7Unlocked = true;
+            GameManager.instance.bmkNext.SetActive(true);
         }
     }
 }

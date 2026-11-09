@@ -4,19 +4,17 @@
 TagManager:
   serializedVersion: 3
   tags:
+  - Past
+  - InFront
   - Panda Civil Type-R
-  - SilverBird MZ-7
-  - Gear-San Gizmo GTR
-  - BMK K2
-  - 4Rings Super 6
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Rival
   - Water
   - UI
-  - 
+  - Player
   - 
   - 
   - 

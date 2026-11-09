@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
     public GameObject pandaCivilTypeR;
     public GameObject pandaNext;
     public GameObject bmkK2;
+    public GameObject bmkNext;
     public GameObject fourRingsSuperFour;
     public Transform spawnPoint;
 
@@ -66,6 +67,9 @@ public class GameManager : MonoBehaviour
 
         isPaused = false;
         pauseScreen.SetActive(false);
+
+        pandaNext.SetActive(false);
+        bmkNext.SetActive(false);
     }
 
     public void setCarIndex(int index)

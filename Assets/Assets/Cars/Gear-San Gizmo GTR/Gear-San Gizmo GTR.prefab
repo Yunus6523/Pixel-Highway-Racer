@@ -344,8 +344,16 @@ MonoBehaviour:
   canUpShift: 0
   currentGear: 0
   currentSpeed: 0
+  verticalInput: 0
+  input: {x: 0, y: 0}
   rigidbody2D: {fileID: 0}
   playerInput: {fileID: 0}
+  steeringWheel: {fileID: 0}
+  animationStrings: []
+  speedDisplay: 0
+  speedDisplayText: {fileID: 0}
+  gearDisplay: 0
+  gearDisplayText: {fileID: 0}
   moveDirection: {x: 0, y: 0}
   throttleAction:
     m_Name: Throttle
@@ -392,6 +400,16 @@ MonoBehaviour:
     m_Type: 0
     m_ExpectedControlType: 
     m_Id: a55dcd5f-8f4c-4f7a-b4fb-81906eb9c0e8
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+    m_Priority: 0
+  pauseAction:
+    m_Name: Pause
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: d9ec2de9-a7f8-49ea-84fc-7355cb5c2712
     m_Processors: 
     m_Interactions: 
     m_SingletonActionBindings: []

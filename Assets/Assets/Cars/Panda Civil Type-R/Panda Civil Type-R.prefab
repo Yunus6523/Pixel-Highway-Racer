@@ -337,8 +337,8 @@ GameObject:
   m_Component:
   - component: {fileID: 608756608801555161}
   - component: {fileID: 3851083531541340223}
-  - component: {fileID: 8338896214287172094}
   - component: {fileID: 6072410609453525737}
+  - component: {fileID: 1000246250273692675}
   m_Layer: 0
   m_Name: Panda Civil Type-R
   m_TagString: Panda Civil Type-R
@@ -395,93 +395,6 @@ MonoBehaviour:
   m_DefaultActionMap: Driving
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &8338896214287172094
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2368825438898249738}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0fee51f9e0ba2246bb6a27a13c72daa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  topSpeed: 0
-  accellarationSpeed: 0
-  brakePower: 5
-  steering: 5
-  gears:
-  - 5
-  - 5
-  - 2.5
-  - 2.5
-  - 2
-  speedPerGears:
-  - 9
-  - 15
-  - 30
-  - 40
-  - 50
-  isAccellerating: 0
-  isBraking: 0
-  canSteer: 0
-  canUpShift: 0
-  currentGear: 0
-  currentSpeed: 0
-  rigidbody2D: {fileID: 0}
-  playerInput: {fileID: 0}
-  moveDirection: {x: 0, y: 0}
-  throttleAction:
-    m_Name: Throttle
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: e04c758d-55a3-4710-a387-45313a783c83
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-    m_Priority: 0
-  brakeAction:
-    m_Name: Brake
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 01c0983e-f8c3-4ce9-b133-cf274b041b88
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-    m_Priority: 0
-  steerAction:
-    m_Name: Steer
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 0ff8b63a-fe91-419a-a886-6ddb793c768f
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-    m_Priority: 0
-  shiftUpAction:
-    m_Name: Shift Up
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 5457d6ca-4382-41b0-a75c-100624294561
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-    m_Priority: 0
-  shiftDownAction:
-    m_Name: Shift Down
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 0b2c50d7-c5a3-46dc-ae83-6e45d3fd938a
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings: []
-    m_Flags: 0
-    m_Priority: 0
 --- !u!50 &6072410609453525737
 Rigidbody2D:
   serializedVersion: 5
@@ -509,6 +422,104 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &1000246250273692675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2368825438898249738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0fee51f9e0ba2246bb6a27a13c72daa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
+  topSpeed: 0
+  accellarationSpeed: 0
+  brakePower: 0
+  steering: 0
+  gears:
+  - 5
+  speedPerGears:
+  - 10
+  isAccellerating: 0
+  isBraking: 0
+  canSteer: 0
+  canUpShift: 0
+  currentGear: 0
+  currentSpeed: 0
+  verticalInput: 0
+  input: {x: 0, y: 0}
+  rigidbody2D: {fileID: 0}
+  playerInput: {fileID: 0}
+  steeringWheel: {fileID: 0}
+  animationStrings:
+  - 
+  speedDisplay: 0
+  speedDisplayText: {fileID: 0}
+  gearDisplay: 0
+  gearDisplayText: {fileID: 0}
+  moveDirection: {x: 0, y: 0}
+  throttleAction:
+    m_Name: Throttle
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 97e8d18d-f9f0-4702-813c-d4d6ad3f46d4
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+    m_Priority: 0
+  brakeAction:
+    m_Name: Brake
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 5b7fa38c-2998-4d33-8fdb-c7d1bd9ce58a
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+    m_Priority: 0
+  steerAction:
+    m_Name: Steer
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 57862c2d-5fc2-4320-98e9-cfc9c793e263
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+    m_Priority: 0
+  shiftUpAction:
+    m_Name: Shift Up
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 73393595-1c4e-4de1-acad-0e774f22cfbf
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+    m_Priority: 0
+  shiftDownAction:
+    m_Name: Shift Down
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: bcc5b3f7-8711-43c3-9f3e-871ddb1fa047
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+    m_Priority: 0
+  pauseAction:
+    m_Name: Pause
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 1e9263e5-ab3b-408e-bd8e-38c2e74aefdd
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+    m_Priority: 0
 --- !u!1 &3755104333279413692
 GameObject:
   m_ObjectHideFlags: 0
