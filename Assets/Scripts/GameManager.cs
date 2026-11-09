@@ -40,6 +40,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject spawnedCop;
     [SerializeField] ChaseManager chaseManager;
 
+    [Header("Rivalry")]
+    public List<GameObject> rivalCarList;
+    public GameObject currentRival;
+    public bool isInRivalRace;
+    public bool yurikoBeaten;
+    
+
     [Header("Highscore")]
     public TextMeshProUGUI counter;
     public float count;
@@ -170,5 +177,10 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 1f;
             pauseScreen.SetActive(false);
         }
+    }
+
+    public void rivalRaceCountdown()
+    {
+
     }
 }

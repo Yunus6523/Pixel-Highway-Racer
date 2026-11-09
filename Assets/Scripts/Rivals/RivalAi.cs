@@ -8,13 +8,16 @@ public class RivalAi : MonoBehaviour
     [SerializeField] Vector2 moveDirection;
 
     [Header("Raycast")]
-    [SerializeField] Transform raycastForwardOrigin;
-    [SerializeField] Transform raycastBackwardOrigin;
+    [SerializeField] Transform obstacleRaycastOrigin;
+    [SerializeField] GameObject raycastForwardOrigin;
+    [SerializeField] GameObject raycastBackwardOrigin;
     //Obstacles
     RaycastHit2D checkForward;
     RaycastHit2D checkLeft;
     RaycastHit2D checkRight;
     //Player
+    RaycastHit2D checkPlayerForward;
+    RaycastHit2D checkPlayerBackward;
 
     [Header("Layer Mask")]
     [SerializeField] LayerMask obstacleRayCastLayerMask;
@@ -40,6 +43,8 @@ public class RivalAi : MonoBehaviour
         moveDirection = new Vector2 (1f, 0);
         up = new Vector2 (0f, 1f);
         down = new Vector2(0f, -1f);
+
+        raycastBackwardOrigin.SetActive(true);
     }
 
     private void FixedUpdate()
@@ -50,29 +55,23 @@ public class RivalAi : MonoBehaviour
             rigidbody.linearVelocity = Vector2.ClampMagnitude(rigidbody.linearVelocity, topSpeed);
         }
 
-        checkForward = Physics2D.Raycast(raycastForwardOrigin.position, Vector2.right, 20f, obstacleRayCastLayerMask);
+        checkForward = Physics2D.Raycast(obstacleRaycastOrigin.position, Vector2.right, 20f, obstacleRayCastLayerMask);
         checkLeft = Physics2D.Raycast(transform.position, Vector2.up, 2f, obstacleRayCastLayerMask);
         checkRight = Physics2D.Raycast(transform.position, -Vector2.up, 2f, obstacleRayCastLayerMask);
+
+        checkPlayerForward = Physics2D.Raycast(raycastForwardOrigin.transform.position, Vector2.up, 15f, playerRayCastLayerMask);
+        checkPlayerForward = Physics2D.Raycast(raycastForwardOrigin.transform.position, -Vector2.up, 15f, playerRayCastLayerMask);
 
         if (checkForward)
         {
             int random = Random.Range(0, 2);
             if(random == 0)
             {
-                rigidbody.linearDamping = 10f;
+                rigidbody.AddForce(Vector2.up * up * steeringSpeed);
             }
-            if(random == 1)
+            if (random == 1)
             {
-                int randomSteering = Random.Range(0, 2);
-                if (randomSteering == 0)
-                {
-                    rigidbody.AddForce(Vector2.up * up * steeringSpeed);
-                }
-                if (randomSteering == 1)
-                {
-                    rigidbody.AddForce(Vector2.up * down * steeringSpeed);
-                   
-                }
+                rigidbody.AddForce(Vector2.up * down * steeringSpeed);
             }
             if (checkLeft)
             {
@@ -82,24 +81,33 @@ public class RivalAi : MonoBehaviour
             {
                 rigidbody.AddForce(Vector2.up * up * steeringSpeed);
             }
-            else if(random == 0||rigidbody.linearVelocity.x > 20)
-            {
-                rigidbody.linearDamping = 0;
-            }
+        }
+        if (checkLeft)
+        {
+            rigidbody.AddForce(Vector2.up * down * steeringSpeed);
+        }
+        if (checkRight)
+        {
+            rigidbody.AddForce(Vector2.up * up * steeringSpeed);
+        }
+
+        if(checkPlayerForward || checkPlayerBackward)
+        {
+            GameManager.instance.rivalRaceCountdown();
         }
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawRay(raycastForwardOrigin.position, Vector2.right * 20);
+        Gizmos.DrawRay(obstacleRaycastOrigin.position, Vector2.right * 20);
         Gizmos.DrawRay(transform.position, Vector2.up * 2f);
         Gizmos.DrawRay(transform.position, -Vector2.up * 2);
 
         Gizmos.color = Color.greenYellow;
-        Gizmos.DrawRay(raycastForwardOrigin.position, Vector2.up * 15);
-        Gizmos.DrawRay(raycastForwardOrigin.position, -Vector2.up * 15);
-        Gizmos.DrawRay(raycastBackwardOrigin.position, Vector2.up * 15);
-        Gizmos.DrawRay(raycastBackwardOrigin.position, -Vector2.up * 15);
+        Gizmos.DrawRay(raycastForwardOrigin.transform.position, Vector2.up * 15);
+        Gizmos.DrawRay(raycastForwardOrigin.transform.position, -Vector2.up * 15);
+        Gizmos.DrawRay(raycastBackwardOrigin.transform.position, Vector2.up * 15);
+        Gizmos.DrawRay(raycastBackwardOrigin.transform.position, -Vector2.up * 15);
     }
 }
