@@ -36,15 +36,22 @@ public class GameManager : MonoBehaviour
     public int carIndex;
 
     [Header("Chase System")]
-    [SerializeField] GameObject copCar;
+    [SerializeField] public GameObject copCar;
     [SerializeField] GameObject spawnedCop;
     [SerializeField] ChaseManager chaseManager;
+    public Transform copSpawnPoint;
+    public Transform copSpawnPointTwo;
+    public Transform copSpawnPointThree;
+    public copSpawnPointRef spawnPointRef;
+
 
     [Header("Rivalry")]
     public List<GameObject> rivalCarList;
     public GameObject currentRival;
     public bool isInRivalRace;
     public bool yurikoBeaten;
+    public float rivalryTimer;
+    public bool rivalryTimerOngoing;
     
 
     [Header("Highscore")]
@@ -77,6 +84,8 @@ public class GameManager : MonoBehaviour
 
         pandaNext.SetActive(false);
         bmkNext.SetActive(false);
+
+        currentRival = rivalCarList[0];
     }
 
     public void setCarIndex(int index)
@@ -87,7 +96,12 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        
+        rivalTimer();
+
+        copSpawnPoint = spawnPointRef.spawnOne;
+        copSpawnPointTwo = spawnPointRef.spawnTwo;
+        copSpawnPointThree = spawnPointRef.spawnThree;
+
         updateHighScoreCounter();
 
         updateChaseSystem();
@@ -109,13 +123,7 @@ public class GameManager : MonoBehaviour
     {
         if(chaseManager.levelCapped == false)
         {
-            if (spawnedCar.transform.position.x > chaseDistanceCounter)
-            {
-                chaseDistanceCounter += chaseDistanceIntervall;
-                chaseManager.currentLevel++;
-                chaseDistanceIntervall += 100;
-                chaseManager.startChase();
-            }
+            chaseManager.startChase();
         }
     }
 
@@ -138,17 +146,6 @@ public class GameManager : MonoBehaviour
     public void progress()
     {
         PlayerPrefs.SetFloat("Highscore", count);
-    }
-
-    public void spawnCop()
-    {
-        if(chaseManager.canSpawn == true)
-        {
-            spawnedCop = Instantiate(copCar, spawnPoint);
-            spawnedCop.GetComponent<Police>().chaseManager = chaseManager;
-            chaseManager.countOfCops.Add(spawnedCop);
-            chaseManager.actualAmount++;
-        }
     }
 
     public void gameOver()
@@ -179,8 +176,26 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void rivalRaceCountdown()
+    public void destroyRival()
     {
+        //Debug
+        Destroy(currentRival);
+    }
 
+    public void rivalTimer()
+    {
+        if(isInRivalRace == true && rivalryTimerOngoing == true)
+        {
+            rivalryTimer++;
+            if(rivalryTimer >= 500f)
+            {
+                destroyRival();
+                isInRivalRace = false;
+            }
+        }
+        if(isInRivalRace == false || rivalryTimerOngoing == false)
+        {
+            rivalryTimer = 0;
+        }
     }
 }

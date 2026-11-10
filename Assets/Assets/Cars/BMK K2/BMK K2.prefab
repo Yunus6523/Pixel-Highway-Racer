@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7918537088093448688}
   - component: {fileID: 1519693419947022666}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Spot Light 2D (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1179904335163121162}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Headlights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -151,7 +151,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8319829322799470889}
   - component: {fileID: 7772935316562985961}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Spot Light 2D (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -262,7 +262,8 @@ GameObject:
   - component: {fileID: 8338896214287172094}
   - component: {fileID: 6072410609453525737}
   - component: {fileID: 4514704626572913764}
-  m_Layer: 0
+  - component: {fileID: 7392539343858421224}
+  m_Layer: 6
   m_Name: BMK K2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -356,6 +357,8 @@ MonoBehaviour:
   canUpShift: 0
   currentGear: 0
   currentSpeed: 0
+  verticalInput: 0
+  input: {x: 0, y: 0}
   rigidbody2D: {fileID: 0}
   playerInput: {fileID: 0}
   steeringWheel: {fileID: 2918277029868271308}
@@ -424,6 +427,16 @@ MonoBehaviour:
     m_SingletonActionBindings: []
     m_Flags: 0
     m_Priority: 0
+  pauseAction:
+    m_Name: Pause
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: c721aaba-caad-4f7f-8df8-f9dbafb4cfbf
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+    m_Priority: 0
 --- !u!50 &6072410609453525737
 Rigidbody2D:
   serializedVersion: 5
@@ -473,6 +486,52 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!61 &7392539343858421224
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2368825438898249738}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0.11432457, y: -0.8345695}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 7.356447, y: 1.297244}
+  m_EdgeRadius: 0
 --- !u!1 &3755104333279413692
 GameObject:
   m_ObjectHideFlags: 0
@@ -482,7 +541,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6563367433179626245}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -514,7 +573,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5338784951569033141}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TuningOptions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -546,7 +605,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8621451845135912871}
   - component: {fileID: 7871847891478675400}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Spot Light 2D (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -653,7 +712,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2565436690830750486}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BrakeLight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -687,7 +746,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9090807626031838552}
   - component: {fileID: 1112166424665945257}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Spot Light 2D (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -795,7 +854,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7675983455697099467}
   - component: {fileID: 3990670315708648855}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Car
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -886,7 +945,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7424887098218095860}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Lights
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -921,6 +980,18 @@ PrefabInstance:
     - target: {fileID: 2584764908227961793, guid: df65a2a23f74f64498f802215d9245a2, type: 3}
       propertyPath: m_Name
       value: BMK K2 Dashboard
+      objectReference: {fileID: 0}
+    - target: {fileID: 2584764908227961793, guid: df65a2a23f74f64498f802215d9245a2, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3159486276486804433, guid: df65a2a23f74f64498f802215d9245a2, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4638054319611326856, guid: df65a2a23f74f64498f802215d9245a2, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5073629031817792235, guid: df65a2a23f74f64498f802215d9245a2, type: 3}
       propertyPath: m_Pivot.x
@@ -1001,6 +1072,14 @@ PrefabInstance:
     - target: {fileID: 5073629031817792235, guid: df65a2a23f74f64498f802215d9245a2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5875571754652174632, guid: df65a2a23f74f64498f802215d9245a2, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8328713210647501626, guid: df65a2a23f74f64498f802215d9245a2, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8610454093072241637, guid: df65a2a23f74f64498f802215d9245a2, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag

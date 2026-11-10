@@ -44,7 +44,8 @@ public class RivalAi : MonoBehaviour
         up = new Vector2 (0f, 1f);
         down = new Vector2(0f, -1f);
 
-        raycastBackwardOrigin.SetActive(true);
+        GameManager.instance.isInRivalRace = true;
+        raycastBackwardOrigin.SetActive(false);
     }
 
     private void FixedUpdate()
@@ -62,9 +63,15 @@ public class RivalAi : MonoBehaviour
         checkPlayerForward = Physics2D.Raycast(raycastForwardOrigin.transform.position, Vector2.up, 15f, playerRayCastLayerMask);
         checkPlayerForward = Physics2D.Raycast(raycastForwardOrigin.transform.position, -Vector2.up, 15f, playerRayCastLayerMask);
 
+        checkPlayerBackward = Physics2D.Raycast(raycastBackwardOrigin.transform.position, Vector2.up, 15f, playerRayCastLayerMask);
+        checkPlayerBackward = Physics2D.Raycast(raycastBackwardOrigin.transform.position, -Vector2.up, 15f, playerRayCastLayerMask);
+
+
+        Debug.Log(checkForward.collider);
+
         if (checkForward)
         {
-            int random = Random.Range(0, 2);
+            int random = Random.Range(0, 3);
             if(random == 0)
             {
                 rigidbody.AddForce(Vector2.up * up * steeringSpeed);
@@ -73,6 +80,13 @@ public class RivalAi : MonoBehaviour
             {
                 rigidbody.AddForce(Vector2.up * down * steeringSpeed);
             }
+            if(random == 2)
+            {
+                return;
+            }
+
+            Debug.Log(random);
+
             if (checkLeft)
             {
                 rigidbody.AddForce(Vector2.up * down * steeringSpeed);
@@ -91,9 +105,18 @@ public class RivalAi : MonoBehaviour
             rigidbody.AddForce(Vector2.up * up * steeringSpeed);
         }
 
-        if(checkPlayerForward || checkPlayerBackward)
+        if(checkPlayerForward)
         {
-            GameManager.instance.rivalRaceCountdown();
+            raycastBackwardOrigin.SetActive(true);
+            raycastForwardOrigin.SetActive(false);
+            //GameManager.instance.destroyRival();
+            GameManager.instance.rivalryTimerOngoing = true;
+        }
+        if (checkPlayerBackward)
+        {
+            raycastForwardOrigin.SetActive(true);
+            raycastBackwardOrigin.SetActive(false);
+            GameManager.instance.rivalryTimerOngoing = false;
         }
     }
 

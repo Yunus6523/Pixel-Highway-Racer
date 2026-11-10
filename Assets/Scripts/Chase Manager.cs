@@ -21,6 +21,9 @@ public class ChaseManager : MonoBehaviour
     [SerializeField] public int maxLevel;
     [SerializeField] public bool levelCapped;
 
+    [Header("Spawn Points")]
+    [SerializeField] WorldGenerator worldGenerator;
+
     [SerializeField] GameObject player;
 
     //public float amountOfCops;
@@ -38,19 +41,6 @@ public class ChaseManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (chase == true)
-        {
-            canSpawn = true;
-            if (actualAmount <= spawnableAmount)
-            {
-                GameManager.instance.spawnCop();
-            }
-            else if (actualAmount >= spawnableAmount)
-            {
-                canSpawn = false;
-            }
-        }
-
         player = GameManager.instance.spawnedCar;
 
         bool shouldArrest = false;
@@ -69,21 +59,21 @@ public class ChaseManager : MonoBehaviour
             cancelArrest();
         }
 
-        switch (currentLevel)
-        {
-            case 2:
-                spawnableAmount = 5;
-                break;
-            case 3:
-                spawnableAmount = 8;
-                break;
-            case 4:
-                spawnableAmount = 10;
-                break;
-            case 5:
-                spawnableAmount = 15;
-                break;
-        }
+        //switch (currentLevel)
+        //{
+        //    case 2:
+        //        spawnableAmount = 5;
+        //        break;
+        //    case 3:
+        //        spawnableAmount = 8;
+        //        break;
+        //    case 4:
+        //        spawnableAmount = 10;
+        //        break;
+        //    case 5:
+        //        spawnableAmount = 15;
+        //        break;
+        //}
 
         if(currentLevel == 5)
         {
@@ -95,6 +85,15 @@ public class ChaseManager : MonoBehaviour
     public void startChase()
     {
         chase = true;
+        if(actualAmount <= spawnableAmount)
+        {
+            //Instantiate(GameManager.instance.copCar, GameManager.instance.copSpawnPoint);
+            //Instantiate(GameManager.instance.copCar, GameManager.instance.copSpawnPointTwo);
+            //Instantiate(GameManager.instance.copCar, GameManager.instance.copSpawnPointThree);
+            actualAmount += 3 ;
+            spawnableAmount = 6;
+            levelCapped = false;
+        }
     }
 
     private void FixedUpdate()
