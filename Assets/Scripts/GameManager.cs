@@ -26,7 +26,9 @@ public class GameManager : MonoBehaviour
     public GameObject pandaNext;
     public GameObject bmkK2;
     public GameObject bmkNext;
-    public GameObject fourRingsSuperFour;
+    public GameObject SilverBird;
+    public GameObject SilverBirdNext;
+    public GameObject FourRings;
     public Transform spawnPoint;
 
     [Header("Modular Car Spawn")]
@@ -36,13 +38,13 @@ public class GameManager : MonoBehaviour
     public int carIndex;
 
     [Header("Chase System")]
-    [SerializeField] public GameObject copCar;
-    [SerializeField] GameObject spawnedCop;
     [SerializeField] ChaseManager chaseManager;
     public Transform copSpawnPoint;
     public Transform copSpawnPointTwo;
     public Transform copSpawnPointThree;
-    public copSpawnPointRef spawnPointRef;
+    public GameObject gameOverScreen;
+    public float chaseDistanceIntervall;
+    public float chaseDistanceCounter;
 
 
     [Header("Rivalry")]
@@ -60,11 +62,6 @@ public class GameManager : MonoBehaviour
     public float distanceHighscoreIntervall;
     public float currentDistanceCounter;
 
-    [Header("Chase System")]
-    public GameObject gameOverScreen;
-    public float chaseDistanceIntervall;
-    public float chaseDistanceCounter;
-
     private void Awake()
     {
         instance = this;
@@ -77,7 +74,8 @@ public class GameManager : MonoBehaviour
 
         pandaCivilTypeR.SetActive(true);
         bmkK2.SetActive(false);
-        fourRingsSuperFour.SetActive(false);
+        SilverBird.SetActive(false);
+        FourRings.SetActive(false);
 
         isPaused = false;
         pauseScreen.SetActive(false);
@@ -97,10 +95,6 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         rivalTimer();
-
-        copSpawnPoint = spawnPointRef.spawnOne;
-        copSpawnPointTwo = spawnPointRef.spawnTwo;
-        copSpawnPointThree = spawnPointRef.spawnThree;
 
         updateHighScoreCounter();
 
@@ -123,7 +117,18 @@ public class GameManager : MonoBehaviour
     {
         if(chaseManager.levelCapped == false)
         {
-            chaseManager.startChase();
+            if(spawnedCar.transform.position.x > chaseDistanceCounter)
+            {
+                chaseDistanceCounter += chaseDistanceIntervall;
+                if(chaseManager.chase == false)
+                {
+                    chaseManager.startChase();
+                }
+                if(chaseManager.chase == true)
+                {
+                    chaseManager.currentLevel++;
+                }
+            }
         }
     }
 

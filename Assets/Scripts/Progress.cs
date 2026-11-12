@@ -32,6 +32,7 @@ public class Progress : MonoBehaviour
         //BMKIndex = PlayerPrefs.GetInt("BMK");
 
         PlayerPrefs.SetInt("MZ-7", silverbirdMZ7Index);
+        PlayerPrefs.SetInt("4Rings", fourRingsSuperSixIndex);
     }
 
     // Update is called once per frame
@@ -62,6 +63,16 @@ public class Progress : MonoBehaviour
         {
             silverbirdMZ7Unlocked = true;
             GameManager.instance.bmkNext.SetActive(true);
+        }
+        if (PlayerPrefs.GetInt("4Rings") == 0)
+        {
+            fourRingsSuperSixUnlocked = false;
+            GameManager.instance.SilverBirdNext.SetActive(false);
+        }
+        if (PlayerPrefs.GetInt("4Rings") == 1)
+        {
+            fourRingsSuperSixUnlocked = true;
+            GameManager.instance.SilverBirdNext.SetActive(true);
         }
     }
 }

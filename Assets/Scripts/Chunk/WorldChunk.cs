@@ -8,9 +8,9 @@ public class WorldChunk : MonoBehaviour
     [SerializeField] int carIndex;
 
     [Header("Spawn Transform")]
-    [SerializeField] Transform spawnPointOne;
-    [SerializeField] Transform spawnPointTwo;
-    [SerializeField] Transform spawnPointThree;
+    public Transform spawnPointOne;
+    public Transform spawnPointTwo;
+    public Transform spawnPointThree;
 
     [Header("Randomizer")]
     [SerializeField] int randomOne;
@@ -19,9 +19,9 @@ public class WorldChunk : MonoBehaviour
 
     private void Start()
     {
-        randomOne = Random.Range(0, 2);
-        randomTwo = Random.Range(0, 11);
-        randomThree = Random.Range(0, 11);
+        randomOne = Random.Range(0, 21);
+        randomTwo = Random.Range(0, 21);
+        randomThree = Random.Range(0, 21);
 
         spawnCarAtOne();
         spawnCarAtTwo();

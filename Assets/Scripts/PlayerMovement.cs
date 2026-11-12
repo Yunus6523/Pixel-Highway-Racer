@@ -31,7 +31,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Rigidbody2D rigidbody2D;
     [SerializeField] private PlayerInput playerInput;
     public Animator steeringWheel;
-    public string[] animationStrings;
+    public string[] steeringWheelAnimations;
+    public Animator car;
+    public string[] carAnimations;
 
     [Header("Dashboard")]
     [SerializeField] private float speedDisplay;
@@ -52,6 +54,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private InputAction shiftDownAction;
     [SerializeField] private InputAction pauseAction;
 
+    [SerializeField] Transform copSpawnPointOne;
+    [SerializeField] Transform copSpawnPointTwo;
+    [SerializeField] Transform copSpawnPointThree;
+    [SerializeField] Transform npcSpawnPointOne;
+    [SerializeField] Transform npcSpawnPointTwo;
+    [SerializeField] Transform npcSpawnPointThree;
+    [SerializeField] WorldChunk chunk;
+
     void Start()
     {
         //Initialize Cars Stock Values
@@ -66,7 +76,8 @@ public class PlayerMovement : MonoBehaviour
         currentGear = 0;
         currentSpeed = 0;
 
-        steeringWheel.Play(animationStrings[0]);
+        steeringWheel.Play(steeringWheelAnimations[0]);
+        car.Play(carAnimations[0]);
 
         gearDisplay = 1f;
         speedDisplay = 0f;
@@ -95,6 +106,14 @@ public class PlayerMovement : MonoBehaviour
         shiftUpAction.performed += shiftNextGear;
         shiftDownAction.performed += shiftPreviousGear;
         pauseAction.performed += pauseGame;
+
+        GameManager.instance.copSpawnPoint = copSpawnPointOne;
+        GameManager.instance.copSpawnPointTwo = copSpawnPointTwo;
+        GameManager.instance.copSpawnPointThree = copSpawnPointThree;
+
+        chunk.spawnPointOne = npcSpawnPointOne;
+        chunk.spawnPointTwo = npcSpawnPointTwo;
+        chunk.spawnPointThree = npcSpawnPointThree;
     }
 
     // Update is called once per frame
@@ -127,6 +146,7 @@ public class PlayerMovement : MonoBehaviour
         {
             //rigidbody2D.AddForce(-moveDirection / brakePower);
             rigidbody2D.linearDamping = brakePower;
+            car.Play(carAnimations[0]);
             previousGear();
         }
         else
@@ -145,19 +165,24 @@ public class PlayerMovement : MonoBehaviour
 
         if(rigidbody2D.linearVelocity.magnitude >= 0.01)
         {
+            car.Play(carAnimations[1]);
             rigidbody2D.AddForce(Vector2.up * verticalInput * steering);
             if(verticalInput > 0.1f)
             {
-                steeringWheel.Play(animationStrings[6]);
+                steeringWheel.Play(steeringWheelAnimations[6]);
             }
-            if (verticalInput < -0.1f)
+            if (verticalInput < 0f)
             {
-                steeringWheel.Play(animationStrings[4]);
+                steeringWheel.Play(steeringWheelAnimations[3]);
             }
             if(verticalInput == 0f)
             {
-                steeringWheel.Play(animationStrings[0]);
+                steeringWheel.Play(steeringWheelAnimations[0]);
             }
+        }
+        else
+        {
+            car.Play(carAnimations[0]);
         }
     }
 
@@ -186,14 +211,14 @@ public class PlayerMovement : MonoBehaviour
         if(canUpShift == true)
         {
             nextGear();
-            steeringWheel.Play(animationStrings[1]);
+            steeringWheel.Play(steeringWheelAnimations[1]);
             if(verticalInput > 0.1f)
             {
-                steeringWheel.Play(animationStrings[8]);
+                steeringWheel.Play(steeringWheelAnimations[7]);
             }
-            else if (verticalInput < 0.1f)
+            else if (verticalInput < 0f)
             {
-                steeringWheel.Play(animationStrings[5]);
+                steeringWheel.Play(steeringWheelAnimations[4]);
             }
         }
     }
@@ -256,7 +281,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 Debug.Log(i);
                 accellarationSpeed += accellarationSpeed + gears[i];
-                steeringWheel.Play(animationStrings[2]);
+                steeringWheel.Play(steeringWheelAnimations[2]);
             }
         }
 

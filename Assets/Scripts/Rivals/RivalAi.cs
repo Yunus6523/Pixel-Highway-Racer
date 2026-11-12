@@ -66,9 +66,6 @@ public class RivalAi : MonoBehaviour
         checkPlayerBackward = Physics2D.Raycast(raycastBackwardOrigin.transform.position, Vector2.up, 15f, playerRayCastLayerMask);
         checkPlayerBackward = Physics2D.Raycast(raycastBackwardOrigin.transform.position, -Vector2.up, 15f, playerRayCastLayerMask);
 
-
-        Debug.Log(checkForward.collider);
-
         if (checkForward)
         {
             int random = Random.Range(0, 3);

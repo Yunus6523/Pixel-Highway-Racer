@@ -16,6 +16,7 @@ public class WorldGenerator : MonoBehaviour
     [Header("Starting Chunks")]
     [SerializeField] GameObject[] startingChunks;
     [SerializeField] float firstChunkOffset = 10f;
+    [SerializeField] GameObject chunk;
 
     float nextSpawnX;
     readonly List<GameObject> spawnedChunks = new List<GameObject>();
@@ -41,7 +42,7 @@ public class WorldGenerator : MonoBehaviour
     void spawn()
     {
         GameObject prefab = chunkPrefabs[Random.Range(0, chunkPrefabs.Length)];
-        GameObject chunk = Instantiate(prefab, new Vector3(nextSpawnX, 0f, 0f), Quaternion.identity);
+        chunk = Instantiate(prefab, new Vector3(nextSpawnX, 0f, 0f), Quaternion.identity);
         chunk.transform.SetParent(transform);
         spawnedChunks.Add(chunk);
 
@@ -52,12 +53,12 @@ public class WorldGenerator : MonoBehaviour
     {
         for(int i = spawnedChunks.Count - 1; i >= 0; --i)
         {
-            GameObject chunk = spawnedChunks[i];
+            GameObject chunkI = spawnedChunks[i];
 
-            if(player.position.x - chunk.transform.position.x > despawnDistance)
+            if(player.position.x - chunkI.transform.position.x > despawnDistance)
             {
                 spawnedChunks.RemoveAt(i);
-                Destroy(chunk);
+                Destroy(chunkI);
             }
         }
     }

@@ -7,9 +7,10 @@ public class ChaseManager : MonoBehaviour
     [Header("Police")]
     public bool chase;
     public bool canSpawn;
-    public float spawnableAmount;
-    public float actualAmount;
+    public int spawnableAmount;
+    public int actualAmount;
     public List<GameObject> countOfCops;
+    public GameObject cop;
 
     [Header("Arrest")]
     [SerializeField] public float arrestTime;
@@ -32,10 +33,57 @@ public class ChaseManager : MonoBehaviour
         currentLevel = 0;
         maxLevel = 5;
         chase = false;
-        spawnableAmount = 2;
+        spawnableAmount = 3;
         actualAmount = 0;
+    }
 
-        
+    public void startChase()
+    {
+        chase = true;
+        canSpawn = true;
+        if (currentLevel == 0)
+        {
+            spawnCops();
+        }
+    }
+
+    public void spawnCops()
+    {
+        if(actualAmount >= spawnableAmount)
+        {
+            canSpawn = false;
+        }
+        else if (actualAmount < spawnableAmount)
+        {
+            if (canSpawn == true)
+            {
+                if (actualAmount == spawnableAmount - 1)
+                {
+                    Instantiate(cop, GameManager.instance.copSpawnPoint);
+                    actualAmount++;
+                    canSpawn = false;
+                }
+                if (actualAmount == spawnableAmount - 2)
+                {
+                    Instantiate(cop, GameManager.instance.copSpawnPoint);
+                    actualAmount++;
+                    Instantiate(cop, GameManager.instance.copSpawnPointTwo);
+                    actualAmount++;
+                    canSpawn = false;
+                }
+                if (actualAmount == spawnableAmount - 3)
+                {
+                    Instantiate(cop, GameManager.instance.copSpawnPoint);
+                    actualAmount++;
+                    Instantiate(cop, GameManager.instance.copSpawnPointTwo);
+                    actualAmount++;
+                    Instantiate(cop, GameManager.instance.copSpawnPointThree);
+                    actualAmount++;
+                    canSpawn = false;
+                }
+            }
+        }
+
     }
 
     // Update is called once per frame
@@ -47,7 +95,7 @@ public class ChaseManager : MonoBehaviour
         foreach (GameObject police in countOfCops)
         {
             float distance = Vector2.Distance(player.transform.position, police.transform.position);
-            if (distance < 1)
+            if (distance < 4)
             {
                 shouldArrest = true;
                 arrest();
@@ -59,42 +107,37 @@ public class ChaseManager : MonoBehaviour
             cancelArrest();
         }
 
-        //switch (currentLevel)
-        //{
-        //    case 2:
-        //        spawnableAmount = 5;
-        //        break;
-        //    case 3:
-        //        spawnableAmount = 8;
-        //        break;
-        //    case 4:
-        //        spawnableAmount = 10;
-        //        break;
-        //    case 5:
-        //        spawnableAmount = 15;
-        //        break;
-        //}
+        switch (currentLevel)
+        {
+            case 2:
+                spawnableAmount = 6;
+                canSpawn = true;
+                spawnCops();
+                break;
+            case 3:
+                spawnableAmount = 9;
+                canSpawn = true;
+                spawnCops();
+                break;
+            case 4:
+                spawnableAmount = 12;
+                canSpawn = true;
+                spawnCops();
+                break;
+            case 5:
+                spawnableAmount = 15;
+                canSpawn = true;
+                spawnCops();
+                break;
+        }
 
-        if(currentLevel == 5)
+        if (currentLevel == 5)
         {
             levelCapped = true;
         }
 
     }
 
-    public void startChase()
-    {
-        chase = true;
-        if(actualAmount <= spawnableAmount)
-        {
-            //Instantiate(GameManager.instance.copCar, GameManager.instance.copSpawnPoint);
-            //Instantiate(GameManager.instance.copCar, GameManager.instance.copSpawnPointTwo);
-            //Instantiate(GameManager.instance.copCar, GameManager.instance.copSpawnPointThree);
-            actualAmount += 3 ;
-            spawnableAmount = 6;
-            levelCapped = false;
-        }
-    }
 
     private void FixedUpdate()
     {
@@ -105,7 +148,7 @@ public class ChaseManager : MonoBehaviour
     {
         if (isBeingArrested == false)
         {
-        Debug.Log("Starting Arrest");
+            Debug.Log("Starting Arrest");
             arrestCoroutine = StartCoroutine(initiateArrest());
             isBeingArrested = true;
         }
@@ -115,7 +158,7 @@ public class ChaseManager : MonoBehaviour
     {
         if (isBeingArrested == true)
         {
-        Debug.Log("Caneling Arrest");
+            Debug.Log("Caneling Arrest");
             StopCoroutine(arrestCoroutine);
             isBeingArrested = false;
         }

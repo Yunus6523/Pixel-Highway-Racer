@@ -76,7 +76,6 @@ public class NPCCars : MonoBehaviour
             if (random == 0)
             {
                 rigidbody.linearDamping = 5f;
-                Debug.Log("BREAKING!");
             }
             else
             {
@@ -95,7 +94,6 @@ public class NPCCars : MonoBehaviour
                 {
                     rigidbody.linearVelocity = Vector2.ClampMagnitude(rigidbody.linearVelocity, twenty);
                 }
-                Debug.Log("Driving Twenty");
                 break;
             case 1:
                 rigidbody.AddForce(moveDirection * thirtyKMH);
@@ -103,7 +101,7 @@ public class NPCCars : MonoBehaviour
                 {
                     rigidbody.linearVelocity = Vector2.ClampMagnitude(rigidbody.linearVelocity, thirty);
                 }
-                Debug.Log("Driving Thirty");
+                
                 break;
             case 2:
                 rigidbody.AddForce(moveDirection * fiftyKMH);
@@ -111,7 +109,7 @@ public class NPCCars : MonoBehaviour
                 {
                     rigidbody.linearVelocity = Vector2.ClampMagnitude(rigidbody.linearVelocity, fifty);
                 }
-                Debug.Log("Driving Fifty");
+                
                 break;
             case 4:
                 rigidbody.AddForce(moveDirection * hundredKMH);
@@ -119,7 +117,7 @@ public class NPCCars : MonoBehaviour
                 {
                     rigidbody.linearVelocity = Vector2.ClampMagnitude(rigidbody.linearVelocity, hundred);
                 }
-                Debug.Log("Driving Hundred");
+                
                 break;
         }
     }
