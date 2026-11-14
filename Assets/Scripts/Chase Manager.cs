@@ -109,25 +109,36 @@ public class ChaseManager : MonoBehaviour
 
         switch (currentLevel)
         {
+            case 1:
+                GameManager.instance.wantedLVL1.SetActive(true);
+                break;
             case 2:
-                spawnableAmount = 6;
-                canSpawn = true;
-                spawnCops();
+            spawnableAmount = 6;
+            canSpawn = true;
+            spawnCops();
+            GameManager.instance.wantedLVL1.SetActive(false);
+            GameManager.instance.wantedLVL2.SetActive(true);
+            break;
+        case 3:
+            spawnableAmount = 9;
+            canSpawn = true;
+            spawnCops();
+                GameManager.instance.wantedLVL2.SetActive(false);
+                GameManager.instance.wantedLVL3.SetActive(true);
                 break;
-            case 3:
-                spawnableAmount = 9;
-                canSpawn = true;
-                spawnCops();
+        case 4:
+            spawnableAmount = 12;
+            canSpawn = true;
+            spawnCops();
+                GameManager.instance.wantedLVL3.SetActive(false);
+                GameManager.instance.wantedLVL4.SetActive(true);
                 break;
-            case 4:
-                spawnableAmount = 12;
-                canSpawn = true;
-                spawnCops();
-                break;
-            case 5:
-                spawnableAmount = 15;
-                canSpawn = true;
-                spawnCops();
+        case 5:
+            spawnableAmount = 15;
+            canSpawn = true;
+            spawnCops();
+                GameManager.instance.wantedLVL4.SetActive(false);
+                GameManager.instance.wantedLVL5.SetActive(true);
                 break;
         }
 

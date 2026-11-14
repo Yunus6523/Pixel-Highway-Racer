@@ -60,11 +60,16 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] Transform npcSpawnPointOne;
     [SerializeField] Transform npcSpawnPointTwo;
     [SerializeField] Transform npcSpawnPointThree;
+    [SerializeField] Transform rivalSpawnPoint;
     [SerializeField] WorldChunk chunk;
+
+
 
     void Start()
     {
         //Initialize Cars Stock Values
+
+        rivalSpawnPoint = GameManager.instance.rivalSpawn;
         isAccellerating = false;
         isBraking = false;
         canSteer = false;

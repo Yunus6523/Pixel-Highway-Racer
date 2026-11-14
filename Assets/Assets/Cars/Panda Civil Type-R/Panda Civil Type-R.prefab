@@ -326,7 +326,7 @@ GameObject:
   - component: {fileID: 7392539343858421224}
   m_Layer: 6
   m_Name: Panda Civil Type-R
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -354,6 +354,7 @@ Transform:
   - {fileID: 3521110246864131952}
   - {fileID: 6984100242798670288}
   - {fileID: 5406122188387596989}
+  - {fileID: 1807758638409667132}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6831191576183536976
@@ -477,6 +478,7 @@ MonoBehaviour:
   npcSpawnPointOne: {fileID: 3521110246864131952}
   npcSpawnPointTwo: {fileID: 6984100242798670288}
   npcSpawnPointThree: {fileID: 5406122188387596989}
+  rivalSpawnPoint: {fileID: 1807758638409667132}
   chunk: {fileID: 1586612318794074320, guid: d75bc7ded0eb58c43ae12f8b689e1609, type: 3}
 --- !u!114 &3851083531541340223
 MonoBehaviour:
@@ -581,6 +583,37 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 7.356447, y: 1.297244}
   m_EdgeRadius: 0
+--- !u!1 &2625663114540004711
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1807758638409667132}
+  m_Layer: 6
+  m_Name: Rival Spawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1807758638409667132
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2625663114540004711}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 40, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 608756608801555161}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3644178065366969674
 GameObject:
   m_ObjectHideFlags: 0

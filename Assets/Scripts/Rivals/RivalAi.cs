@@ -57,8 +57,8 @@ public class RivalAi : MonoBehaviour
         }
 
         checkForward = Physics2D.Raycast(obstacleRaycastOrigin.position, Vector2.right, 20f, obstacleRayCastLayerMask);
-        checkLeft = Physics2D.Raycast(transform.position, Vector2.up, 2f, obstacleRayCastLayerMask);
-        checkRight = Physics2D.Raycast(transform.position, -Vector2.up, 2f, obstacleRayCastLayerMask);
+        checkLeft = Physics2D.Raycast(transform.position, Vector2.up, 1.6f, obstacleRayCastLayerMask);
+        checkRight = Physics2D.Raycast(transform.position, -Vector2.up, 1.6f, obstacleRayCastLayerMask);
 
         checkPlayerForward = Physics2D.Raycast(raycastForwardOrigin.transform.position, Vector2.up, 15f, playerRayCastLayerMask);
         checkPlayerForward = Physics2D.Raycast(raycastForwardOrigin.transform.position, -Vector2.up, 15f, playerRayCastLayerMask);
@@ -121,8 +121,8 @@ public class RivalAi : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawRay(obstacleRaycastOrigin.position, Vector2.right * 20);
-        Gizmos.DrawRay(transform.position, Vector2.up * 2f);
-        Gizmos.DrawRay(transform.position, -Vector2.up * 2);
+        Gizmos.DrawRay(transform.position, Vector2.up * 1.5f);
+        Gizmos.DrawRay(transform.position, -Vector2.up * 1.5f);
 
         Gizmos.color = Color.greenYellow;
         Gizmos.DrawRay(raycastForwardOrigin.transform.position, Vector2.up * 15);
