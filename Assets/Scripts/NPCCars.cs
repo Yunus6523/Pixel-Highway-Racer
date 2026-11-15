@@ -53,8 +53,6 @@ public class NPCCars : MonoBehaviour
         player = GameManager.instance.spawnedCar;
         var distance = Vector2.Distance(transform.position, player.transform.position);
 
-        Debug.Log(distance);
-
         if(distance >= 100)
         {
             Destroy(this.gameObject);

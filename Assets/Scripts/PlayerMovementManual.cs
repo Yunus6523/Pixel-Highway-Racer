@@ -66,7 +66,7 @@ public class PlayerControllerManual : MonoBehaviour
 
     void Start()
     {
-        rivalSpawnPoint = GameManager.instance.rivalSpawn;
+        GameManager.instance.rivalSpawn = rivalSpawnPoint;
 
         //Initialize Cars Stock Values
         isAccellerating = false;

@@ -65,6 +65,7 @@ public class GameManager : MonoBehaviour
     public GameObject gameOverScreen;
     public float chaseDistanceIntervall;
     public float chaseDistanceCounter;
+    public GameObject wantedLVL;
     public GameObject wantedLVL1;
     public GameObject wantedLVL2;
     public GameObject wantedLVL3;
@@ -85,8 +86,9 @@ public class GameManager : MonoBehaviour
     public float rivalryTimer;
     public bool rivalryTimerOngoing;
     public bool rivalCanSpawn;
-    public int spawnedRival;
-    public int maxSpawnedRival;
+    public int rivalSpawnAmount;
+    public int maxRivalSpawnAmount;
+    
 
     [Header("Encounter!")]
     public GameObject yurikoEncounter;
@@ -123,6 +125,7 @@ public class GameManager : MonoBehaviour
         amberPanini.SetActive(false);
 
         switchToRival.SetActive(false);
+        switchToNormal.SetActive(false);
 
         isPaused = false;
         pauseScreen.SetActive(false);
@@ -132,15 +135,13 @@ public class GameManager : MonoBehaviour
 
         musicUi.SetActive(false);
 
-        yurikoBeaten = false;
-        gutierrezBeaten = false;
-        aronBeaten = false;
-        amberBeaten = false;
-
         yurikoEncounter.SetActive(false);
         gutierrezEncounter.SetActive(false);
         aronEncounter.SetActive(false);
         amberEncounter.SetActive(false);
+
+        rivalCanSpawn = false;
+        maxRivalSpawnAmount = 1;
     }
 
     public void setCarIndex(int index)
@@ -178,27 +179,49 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetInt("Panini", 1);
         }
 
-        if(count >= 10)
+        if(rivalSpawnAmount < maxRivalSpawnAmount)
         {
-            switch (rivalIndex)
+           if(count == 10)
             {
-                case 0:
-                    yurikoEncounter.SetActive(true);
-                    StartCoroutine(encounter());
-                    break;
-                case 1:
-                    gutierrezEncounter.SetActive(true);
-                    StartCoroutine(encounter());
-                    break;
-                case 2:
-                    aronEncounter.SetActive(true);
-                    StartCoroutine(encounter());
-                    break;
-                case 3:
-                    amberEncounter.SetActive(true);
-                    StartCoroutine(encounter());
-                    break;
+                rivalCanSpawn = true;
+                if(rivalCanSpawn  == true)
+                {
+                    switch (rivalIndex)
+                    {
+                        case 0:
+                            yurikoEncounter.SetActive(true);
+                            freezeGame();
+                            break;
+                        case 1:
+                            gutierrezEncounter.SetActive(true);
+                            freezeGame();
+                            break;
+                        case 2:
+                            aronEncounter.SetActive(true);
+                            freezeGame();
+                            break;
+                        case 3:
+                            amberEncounter.SetActive(true);
+                            freezeGame();
+                            break;
+                    }
+                }
             }
+        }
+        if(rivalSpawnAmount >= maxRivalSpawnAmount)
+        {
+            rivalCanSpawn = false;
+        }
+    }
+
+    public void spawnRival()
+    {
+        if (rivalCanSpawn == true)
+        {
+            Debug.Log("Rival Spawned)");
+            Instantiate(currentRival, rivalSpawn);
+            rivalSpawnAmount++;
+            rivalCanSpawn =false;
         }
     }
 
@@ -229,6 +252,17 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void setRivalSongTitle(string songTitle)
+    {
+        musicUi.SetActive(true);
+        title.SetText(songTitle);
+    }
+    public void setRivalSongArtist(string songArtist)
+    {
+        musicUi.SetActive(true);
+        artist.SetText(songArtist);
     }
 
     private void FixedUpdate()
@@ -280,10 +314,23 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void freezeGame()
+    {
+        Time.timeScale = 0f;
+        wantedLVL.SetActive(false);
+    }
+
+    public void unfreezeGame()
+    {
+        Time.timeScale = 1f;
+        wantedLVL.SetActive(true);
+    }
+
     public void destroyRival()
     {
         //Debug
         Destroy(currentRival);
+        rivalIndex++;
     }
 
     public void rivalTimer()
@@ -309,26 +356,11 @@ public class GameManager : MonoBehaviour
         musicUi.SetActive(false);
     }
 
-    public IEnumerator encounter()
+    public void encounter()
     {
-        yield return new WaitForSeconds(5);
-
         yurikoEncounter.SetActive(false);
         gutierrezEncounter.SetActive(false);
         aronEncounter.SetActive(false);
         amberEncounter.SetActive(false);
-
-        maxSpawnedRival = 0;
-
-        spawnRival();
-    }
-
-    public void spawnRival()
-    {
-        if(maxSpawnedRival == 0)
-        {
-            Instantiate(currentRival, rivalSpawn);
-            maxSpawnedRival++;
-        }
     }
 }

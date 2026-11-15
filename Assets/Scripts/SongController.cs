@@ -16,7 +16,22 @@ public class SongController : MonoBehaviour
     void Start()
     {
         isInSong = false;
-        
+        if(GameManager.instance.yurikoBeaten == true)
+        {
+            indexMaxRange = 11;
+        }
+        if (GameManager.instance.gutierrezBeaten == true)
+        {
+            indexMaxRange = 12;
+        }
+        if (GameManager.instance.aronBeaten == true)
+        {
+            indexMaxRange = 13;
+        }
+        if(GameManager.instance.amberBeaten == true)
+        {
+            indexMaxRange= 14;
+        }
     }
 
     // Update is called once per frame
@@ -103,12 +118,83 @@ public class SongController : MonoBehaviour
                     GameManager.instance.artist.SetText("Maneskin - RUSH!");
                     StartCoroutine(GameManager.instance.turnOffMusicUi());
                     break;
+                case 10:
+                    StartCoroutine(resetSong(198f));
+                    GameManager.instance.musicUi.SetActive(true);
+                    GameManager.instance.title.SetText("Usseewa");
+                    GameManager.instance.artist.SetText("Ado - Kyogen");
+                    StartCoroutine(GameManager.instance.turnOffMusicUi());
+                    break;
+                case 11:
+                    StartCoroutine(resetSong(205.2f));
+                    GameManager.instance.musicUi.SetActive(true);
+                    GameManager.instance.title.SetText("La Mama De La Mama");
+                    GameManager.instance.artist.SetText("El Alfa, Chael Produciendo, CJ - SAGITARO");
+                    StartCoroutine(GameManager.instance.turnOffMusicUi());
+                    break;
+                case 12:
+                    StartCoroutine(resetSong(243f));
+                    GameManager.instance.musicUi.SetActive(true);
+                    GameManager.instance.title.SetText("Nine Thou (Grant Mohrman Superstars Remix)");
+                    GameManager.instance.artist.SetText("Styles of Beyond - Lost Boys: The Tribe");
+                    StartCoroutine(GameManager.instance.turnOffMusicUi());
+                    break;
+                case 13:
+                    StartCoroutine(resetSong(199.8f));
+                    GameManager.instance.musicUi.SetActive(true);
+                    GameManager.instance.title.SetText("Tranquilty Base Hotel & Casino");
+                    GameManager.instance.artist.SetText("Arctic Monkeys - Tranquilty Base Hotel & Casino");
+                    StartCoroutine(GameManager.instance.turnOffMusicUi());
+                    break;
             }
             isInSong = true;
         }
     }
 
-    IEnumerator resetSong(float time)
+    public void playRivalSong(int Index)
+    {
+        if(isInSong == true)
+        {
+            currentSong.SetActive(false);
+            currentSong = songs[Index];
+            currentSong.SetActive(true);
+
+            switch (Index)
+            {
+                 case 10:
+                    StartCoroutine(resetSong(204f));
+                    GameManager.instance.musicUi.SetActive(true);
+                    GameManager.instance.title.SetText("Usseewa");
+                    GameManager.instance.artist.SetText("Ado - Kyogen");
+                    StartCoroutine(GameManager.instance.turnOffMusicUi());
+                    break;
+                case 11:
+                    StartCoroutine(resetSong(205.2f));
+                    GameManager.instance.musicUi.SetActive(true);
+                    GameManager.instance.title.SetText("La Mama De La Mama");
+                    GameManager.instance.artist.SetText("El Alfa, Chael Produciendo, CJ - SAGITARO");
+                    StartCoroutine(GameManager.instance.turnOffMusicUi());
+                    break;
+                case 12:
+                    StartCoroutine(resetSong(243f));
+                    GameManager.instance.musicUi.SetActive(true);
+                    GameManager.instance.title.SetText("Nine Thou (Grant Mohrman Superstars Remix)");
+                    GameManager.instance.artist.SetText("Styles of Beyond - Lost Boys: The Tribe");
+                    StartCoroutine(GameManager.instance.turnOffMusicUi());
+                    break;
+                case 13:
+                    StartCoroutine(resetSong(199.8f));
+                    GameManager.instance.musicUi.SetActive(true);
+                    GameManager.instance.title.SetText("Tranquilty Base Hotel & Casino");
+                    GameManager.instance.artist.SetText("Arctic Monkeys - Tranquilty Base Hotel & Casino");
+                    StartCoroutine(GameManager.instance.turnOffMusicUi());
+                    break;
+            }
+
+        }
+    }
+
+    public IEnumerator resetSong(float time)
     {
         yield return new WaitForSeconds(time);
         currentSong.SetActive(false);
