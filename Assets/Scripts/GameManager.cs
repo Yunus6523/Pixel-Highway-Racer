@@ -125,7 +125,9 @@ public class GameManager : MonoBehaviour
         amberPanini.SetActive(false);
 
         switchToRival.SetActive(false);
-        switchToNormal.SetActive(false);
+
+        normal.SetActive(true);
+        rivals.SetActive(false);
 
         isPaused = false;
         pauseScreen.SetActive(false);
@@ -211,6 +213,10 @@ public class GameManager : MonoBehaviour
         if(rivalSpawnAmount >= maxRivalSpawnAmount)
         {
             rivalCanSpawn = false;
+        }
+        if(amberBeaten == true)
+        {
+            rivalSpawnAmount = 2;
         }
     }
 

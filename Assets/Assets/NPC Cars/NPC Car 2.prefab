@@ -109,6 +109,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NPCCars
   rigidbody: {fileID: 0}
   moveDirection: {x: 0, y: 0}
+  rayCastOrigin: {x: 0, y: 0}
   up: {x: 0, y: 0}
   down: {x: 0, y: 0}
   steeringSpeed: 0
@@ -183,7 +184,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.029557467, y: -0.9569181}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -193,5 +194,5 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 7, y: 3}
+  m_Size: {x: 6.394075, y: 1.0861638}
   m_EdgeRadius: 0

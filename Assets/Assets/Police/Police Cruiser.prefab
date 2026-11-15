@@ -49,7 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69ea511f258eb6748a7d54228044df28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Police
-  supposedSpeed: 10
+  supposedSpeed: 50
   speed: 0
   steeringSpeed: 10
   breakingPower: 5
