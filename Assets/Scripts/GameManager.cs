@@ -119,7 +119,7 @@ public class GameManager : MonoBehaviour
         FourRings.SetActive(false);
         gearSan.SetActive(false);
 
-        yurikoMZ5.SetActive(false);
+        
         gutierrezFytpe.SetActive(false);
         aronSLS.SetActive(false);
         amberPanini.SetActive(false);
@@ -183,7 +183,7 @@ public class GameManager : MonoBehaviour
 
         if(rivalSpawnAmount < maxRivalSpawnAmount)
         {
-           if(count == 10)
+           if(count == 25)
             {
                 rivalCanSpawn = true;
                 if(rivalCanSpawn  == true)
@@ -337,6 +337,22 @@ public class GameManager : MonoBehaviour
         //Debug
         Destroy(currentRival);
         rivalIndex++;
+        //if (yurikoBeaten == false)
+        //{
+        //    yurikoBeaten = true;
+        //}
+        //if(yurikoBeaten == true)
+        //{
+        //    gutierrezBeaten = true;
+        //}
+        //if(gutierrezBeaten == true)
+        //{
+        //    aronBeaten = true;
+        //}
+        //if (aronBeaten == true)
+        //{
+        //    amberBeaten = true;
+        //}
     }
 
     public void rivalTimer()

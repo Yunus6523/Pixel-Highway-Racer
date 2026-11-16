@@ -19,9 +19,9 @@ public class WorldChunk : MonoBehaviour
 
     private void Start()
     {
-        randomOne = Random.Range(0, 21);
-        randomTwo = Random.Range(0, 21);
-        randomThree = Random.Range(0, 21);
+        randomOne = Random.Range(0, 41);
+        randomTwo = Random.Range(0, 41);
+        randomThree = Random.Range(0, 41);
 
         spawnCarAtOne();
         spawnCarAtTwo();

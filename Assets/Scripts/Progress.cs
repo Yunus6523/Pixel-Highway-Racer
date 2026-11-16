@@ -113,7 +113,6 @@ public class Progress : MonoBehaviour
         if (PlayerPrefs.GetInt("MZ-5") == 1)
         {
             GameManager.instance.switchToRival.SetActive(true);
-            GameManager.instance.yurikoMZ5.SetActive(true);
             GameManager.instance.rivalIndex = 1;
         }
         if (PlayerPrefs.GetInt("Ftype") == 0)

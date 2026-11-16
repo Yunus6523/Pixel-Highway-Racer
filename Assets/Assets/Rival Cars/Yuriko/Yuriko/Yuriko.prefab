@@ -178,9 +178,9 @@ MonoBehaviour:
     m_Bits: 64
   up: {x: 0, y: 0}
   down: {x: 0, y: 0}
-  steeringSpeed: 30
-  acceleration: 2
-  topSpeed: 20
+  steeringSpeed: 40
+  acceleration: 50
+  topSpeed: 100
 --- !u!50 &212692612906556666
 Rigidbody2D:
   serializedVersion: 5

@@ -29,6 +29,20 @@ public class Police : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>();
 
         moveDirection = new Vector2 (1f, 0f);
+
+        int random = Random.Range(0, 3);
+        switch (random)
+        {
+            case 0:
+                speed = 40f;
+                break;
+             case 1:
+                speed = 30f;
+                break;
+            case 2:
+                speed = 50f;
+                break;
+        }
         speed = supposedSpeed;
 
         up = new Vector2 (0f, 2f);

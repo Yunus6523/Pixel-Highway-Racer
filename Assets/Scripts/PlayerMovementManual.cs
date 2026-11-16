@@ -35,6 +35,10 @@ public class PlayerControllerManual : MonoBehaviour
     public int downshiftParam;
     public Animator car;
     public string[] carAnimations;
+    public GameObject dust;
+
+    [Header("Sound")]
+    public GameObject engineSound;
 
     [Header("Dashboard")]
     [SerializeField] private float speedDisplay;
@@ -67,6 +71,9 @@ public class PlayerControllerManual : MonoBehaviour
     void Start()
     {
         GameManager.instance.rivalSpawn = rivalSpawnPoint;
+
+        engineSound.SetActive(false);
+        dust.SetActive(false);
 
         //Initialize Cars Stock Values
         isAccellerating = false;
@@ -142,6 +149,7 @@ public class PlayerControllerManual : MonoBehaviour
         {
             rigidbody2D.AddForce(moveDirection * accellarationSpeed);
             rigidbody2D.linearDamping = 0.1f;
+            engineSound.SetActive(true);
         }
         else
         {
@@ -150,14 +158,16 @@ public class PlayerControllerManual : MonoBehaviour
 
         if (isBraking == true)
         {
-            //rigidbody2D.AddForce(-moveDirection / brakePower);
+            //rigidbody2D.AddForce(-moveDirection / brakePower)
             rigidbody2D.linearDamping = brakePower;
+            dust.SetActive(true);
             car.Play(carAnimations[0]);
             previousGear();
         }
         else
         {
             rigidbody2D.linearDamping = 0.5f;
+            dust.SetActive(false);
         }
 
 
@@ -189,6 +199,7 @@ public class PlayerControllerManual : MonoBehaviour
         else
         {
             car.Play(carAnimations[0]);
+            engineSound.SetActive(false);
         }
     }
 
@@ -217,6 +228,7 @@ public class PlayerControllerManual : MonoBehaviour
         if (canUpShift == true)
         {
             nextGear();
+            engineSound.SetActive(false);
         }
     }
 
